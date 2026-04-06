@@ -1,0 +1,74 @@
+# ==========================================
+# Generali & OS
+# ==========================================
+.DS_Store
+*.log
+.env
+.env.local
+.env.*.local
+
+# ==========================================
+# Docker (Root)
+# ==========================================
+# Di solito docker-compose si tiene, ma ignoriamo i dati persistenti
+docker/db_data/
+docker/volumes/
+
+# ==========================================
+# Backend (Spring Boot + IntelliJ)
+# ==========================================
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Maven/Gradle build folders
+be/target/
+be/build/
+be/.gradle/
+be/bin/
+
+# File specifici di Spring/Java
+be/.recommenders/
+be/*.war
+be/*.jar
+
+# ==========================================
+# Frontend (Flutter)
+# ==========================================
+# Flutter/Dart specific
+fe/.dart_tool/
+fe/.flutter-plugins
+fe/.flutter-plugins-dependencies
+fe/.packages
+fe/.pub-cache
+fe/.pub/
+fe/build/
+
+# Web specifico
+fe/build/web/
+
+# Android specifico
+fe/android/**/generated/
+fe/android/app/debug/
+fe/android/app/release/
+fe/android/key.properties
+fe/*.jks
+fe/*.keystore
+
+# iOS specifico
+fe/ios/.generated/
+fe/ios/Pods/
+fe/ios/Runner/GeneratedPluginRegistrant.h
+fe/ios/Runner/GeneratedPluginRegistrant.m
+fe/ios/Flutter/Generated.xcconfig
+fe/ios/Flutter/flutter_export_environment.sh
+fe/ios/Flutter/App.framework
+fe/ios/Flutter/App.podspec
+
+# ==========================================
+# Varie
+# ==========================================
+.vscode/
