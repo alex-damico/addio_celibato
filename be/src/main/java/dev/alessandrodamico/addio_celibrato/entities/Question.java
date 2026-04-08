@@ -5,8 +5,7 @@ import lombok.*;
 
 @Entity
 @Table(name = "questions")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Question {
@@ -15,10 +14,10 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "position")
+    @Column(name = "position", unique = true, nullable = false)
     private Integer position;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "text")
     private String content;
 
     @Column(name = "correct_answer", length = 255)
