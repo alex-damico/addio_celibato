@@ -1,8 +1,7 @@
 package dev.alessandrodamico.addio_celibrato.controllers;
 
-import dev.alessandrodamico.addio_celibrato.dtos.CreateQuestionDto;
-import dev.alessandrodamico.addio_celibrato.dtos.QuestionDto;
-import dev.alessandrodamico.addio_celibrato.dtos.UpdateQuestionDto;
+import dev.alessandrodamico.addio_celibrato.dtos.*;
+import dev.alessandrodamico.addio_celibrato.services.HintService;
 import dev.alessandrodamico.addio_celibrato.services.QuestionService;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,22 +13,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/questions")
-@Tag(name = "Questions")
-public class QuestionController {
-    private final QuestionService service;
+@RequestMapping("api/hints")
+@Tag(name = "Hints")
+public class HintController {
+    private final HintService service;
 
-    public QuestionController(QuestionService service) {
+    public HintController(HintService service) {
         this.service = service;
     }
 
     @GetMapping("firstPosition")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = QuestionDto.class)) }),
+                            schema = @Schema(implementation = HintDto.class)) }),
             @ApiResponse(responseCode = "400", content = @Content),
             @ApiResponse(responseCode = "404", content = @Content) })
-    public ResponseEntity<QuestionDto> findFirstPosition() {
+    public ResponseEntity<HintDto> findFirstPosition() {
         return ResponseEntity.ok(this.service.findFirstPosition());
     }
 
@@ -40,22 +39,22 @@ public class QuestionController {
             @ApiResponse(responseCode = "400", content = @Content),
             @ApiResponse(responseCode = "403", content = @Content)
     })
-    public ResponseEntity<Long> create(@RequestBody CreateQuestionDto createQuestionDto) {
-        return new ResponseEntity<>(this.service.add(createQuestionDto), HttpStatus.CREATED);
+    public ResponseEntity<Long> create(@RequestBody CreateHintDto createHintDto) {
+        return new ResponseEntity<>(this.service.add(createHintDto), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/{id}/isResolved")
+    @PatchMapping("/{id}/isUnlocked")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = QuestionDto.class)) }),
+                            schema = @Schema(implementation = HintDto.class)) }),
             @ApiResponse(responseCode = "400", content = @Content),
             @ApiResponse(responseCode = "404", content = @Content),
             @ApiResponse(responseCode = "409", content = @Content)
     })
-    public ResponseEntity<QuestionDto> updateIsRevolved(
+    public ResponseEntity<HintDto> updateIsUnlocked(
             @PathVariable Long id,
-            @RequestBody UpdateQuestionDto updateQuestionDto) {
-        return ResponseEntity.ok(this.service.update(id, updateQuestionDto.isRevolved()));
+            @RequestBody UpdateHintDto updateHintDto) {
+        return ResponseEntity.ok(this.service.update(id, updateHintDto.isUnlocked()));
     }
 
 }
