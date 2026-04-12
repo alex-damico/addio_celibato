@@ -38,6 +38,28 @@ be/*.jar
 # ==========================================
 # Frontend (Flutter)
 # ==========================================
+# Flutter/Dart/Pub related
+fe/**/doc/api/
+fe/**/ios/Flutter/.last_build_id
+fe/.dart_tool/
+fe/.flutter-plugins
+fe/.flutter-plugins-dependencies
+fe/.pub-cache/
+fe/.pub/
+fe /build/
+
+# Symbolication related
+fe/app.*.symbols
+
+# Obfuscation related
+fe/app.*.map.json
+
+# Android Studio will place build artifacts here
+fe/android/app/debug
+fe/android/app/profile
+fe/android/app/release
+
+
 # Flutter/Dart specific
 fe/.dart_tool/
 fe/.flutter-plugins
