@@ -1,17 +1,61 @@
+import 'package:fe/main.dart';
+import 'package:fe/models/question.dart';
+import 'package:fe/repositories/question_repository.dart';
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
-class PuzzlePage extends StatefulWidget {
-  const PuzzlePage({super.key});
+class QuestionPage extends StatefulWidget {
+  const QuestionPage({super.key});
 
   @override
-  State<PuzzlePage> createState() => _PuzzlePageState();
+  State<QuestionPage> createState() => _QuestionPageState();
 }
 
-class _PuzzlePageState extends State<PuzzlePage> {
+class _QuestionPageState extends State<QuestionPage> {
+  QuestionDto? _question;
+  bool _isLoading = true;
+  String? _errorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadQuestion();
+  }
+
+  Future<void> _loadQuestion() async {
+    try {
+      final question = await getIt<QuestionRepository>().getFirstPosition();
+      setState(() {
+        _question = question;
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _errorMessage = e.toString();
+        _isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+
+    if (_isLoading) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(color: AppColors.primary),
+        ),
+      );
+    }
+
+    if (_errorMessage != null) {
+      return Scaffold(
+        body: Center(
+          child: Text("Error: $_errorMessage", style: const TextStyle(color: Colors.red)),
+        ),
+      );
+    }
 
     return Scaffold(
       appBar: _buildAppBar(themeData),
@@ -84,7 +128,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
         ),
         const SizedBox(height: 4),
         Text(
-          'ENIGMA #1',
+          'ENIGMA #${_question?.position ?? "?"}',
           style: themeData.textTheme.labelLarge?.copyWith(
             color: Colors.white,
             fontSize: 48,
@@ -162,14 +206,14 @@ class _PuzzlePageState extends State<PuzzlePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'IL PRIMO FRAMMENTO',
+            'INTRODUZIONE',
             style: themeData.textTheme.displayLarge?.copyWith(
               color: AppColors.primary,
             ),
           ),
           const SizedBox(height: 16),
           Text(
-            '"Tutto ebbe inizio tra le note di un vecchio jazz club sotterraneo. Le ombre si allungavano, ma un solo istante rimase impresso nel tempo."',
+            _question?.intro ?? 'Caricamento domanda...',
             style: themeData.textTheme.bodyMedium?.copyWith(
               color: AppColors.onSurfaceVariant,
               fontStyle: FontStyle.italic,
@@ -179,14 +223,14 @@ class _PuzzlePageState extends State<PuzzlePage> {
           ),
           const SizedBox(height: 24),
           Text(
-            'DOMANDA DI ACCESSO',
+            'DOMANDA',
             style: themeData.textTheme.labelSmall?.copyWith(
               color: AppColors.outline,
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            'Qual è la data del primo bacio dello sposo?',
+            _question?.content ?? 'Caricamento domanda...',
             style: themeData.textTheme.bodyMedium?.copyWith(
               color: Colors.white,
             ),

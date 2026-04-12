@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:fe/pages/puzzle_page.dart';
+import 'package:fe/pages/question_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logging/logging.dart';
@@ -23,13 +23,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    QuestionRepository questionRepository = QuestionRepository(
-      restClient: RestClient(Dio()),
-    );
-    questionRepository.getFirstPosition().then(
-      (value) => log.info(value.toJson()),
-    );
-
     int secretCounter = 0;
 
     return Scaffold(
@@ -207,7 +200,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.of(context ).push(
                   MaterialPageRoute(
-                    builder: (context) => const PuzzlePage(),
+                    builder: (context) => const QuestionPage(),
                   ),
                 );
               },

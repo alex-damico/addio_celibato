@@ -1,4 +1,7 @@
+import 'package:dio/dio.dart';
+import 'package:fe/network/rest_client.dart';
 import 'package:fe/pages/home_page.dart';
+import 'package:fe/repositories/question_repository.dart';
 import 'package:fe/service/admin_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -10,6 +13,13 @@ import 'app_colors.dart';
 GetIt getIt = GetIt.instance;
 
 void setupLocator() {
+  final dio = Dio();
+  final restClient = RestClient(dio);
+
+  getIt.registerLazySingleton<QuestionRepository>(
+    () => QuestionRepository(restClient: restClient),
+  );
+
   getIt.registerSingleton<AdminService>(
     AdminService(),
     signalsReady: true,

@@ -18,9 +18,12 @@ public class Question {
     private Integer position;
 
     @Column(columnDefinition = "text")
+    private String intro;
+
+    @Column(columnDefinition = "text", nullable = false)
     private String content;
 
-    @Column(name = "correct_answer", length = 255)
+    @Column(name = "correct_answer", nullable = false)
     private String correctAnswer;
 
     @Column(name = "is_resolved", nullable = false)
