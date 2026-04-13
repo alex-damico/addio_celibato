@@ -1,12 +1,9 @@
-import 'package:dio/dio.dart';
 import 'package:fe/pages/question_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logging/logging.dart';
 
 import '../app_colors.dart';
-import '../network/rest_client.dart';
-import '../repositories/question_repository.dart';
 import '../service/admin_service.dart';
 
 GetIt getIt = GetIt.instance;

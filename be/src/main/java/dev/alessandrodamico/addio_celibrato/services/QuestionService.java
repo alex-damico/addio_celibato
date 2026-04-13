@@ -26,10 +26,10 @@ public class QuestionService {
         }
     }
 
-    public QuestionDto update(Long id, boolean isResolved) {
+    public QuestionDto updateIsRevolved(Long id) {
         Question entity = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Domanda non trovata"));
-        entity.setIsResolved(isResolved);
+        entity.setIsResolved(true);
         return QuestionDto.toDto(repository.save(entity));
     }
 

@@ -13,4 +13,7 @@ abstract class RestClient {
   @GET('/questions/firstPosition')
   Future<QuestionDto> getFirstPosition();
 
+  @PATCH('/questions/{id}/isResolved')
+  Future<void> setResolved(@Path() String id);
+
 }

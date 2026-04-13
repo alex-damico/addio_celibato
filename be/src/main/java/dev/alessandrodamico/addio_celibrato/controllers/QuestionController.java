@@ -2,7 +2,6 @@ package dev.alessandrodamico.addio_celibrato.controllers;
 
 import dev.alessandrodamico.addio_celibrato.dtos.CreateQuestionDto;
 import dev.alessandrodamico.addio_celibrato.dtos.QuestionDto;
-import dev.alessandrodamico.addio_celibrato.dtos.UpdateQuestionDto;
 import dev.alessandrodamico.addio_celibrato.services.QuestionService;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -46,16 +45,14 @@ public class QuestionController {
 
     @PatchMapping("/{id}/isResolved")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = QuestionDto.class)) }),
+            @ApiResponse(responseCode = "200", content = @Content),
             @ApiResponse(responseCode = "400", content = @Content),
             @ApiResponse(responseCode = "404", content = @Content),
             @ApiResponse(responseCode = "409", content = @Content)
     })
     public ResponseEntity<QuestionDto> updateIsRevolved(
-            @PathVariable Long id,
-            @RequestBody UpdateQuestionDto updateQuestionDto) {
-        return ResponseEntity.ok(this.service.update(id, updateQuestionDto.isRevolved()));
+            @PathVariable Long id) {
+        return ResponseEntity.ok(this.service.updateIsRevolved(id));
     }
 
 }

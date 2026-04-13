@@ -17,4 +17,18 @@ class AppColors {
   static const Color outlineVariant = Color(0xFF46484B);
   static const Color tertiary = Color(0xFF00EC3B);
   static const Color primaryFixedDim = Color(0xFFBEEE00);
+
+  // HUD Text Styles
+  static const TextStyle hudTitle = TextStyle(
+    fontSize: 28,
+    fontWeight: FontWeight.w900,
+    fontStyle: FontStyle.italic,
+    letterSpacing: -1,
+  );
+
+  static const TextStyle hudLabel = TextStyle(
+    fontWeight: FontWeight.w900,
+    letterSpacing: 2,
+    fontSize: 18,
+  );
 }

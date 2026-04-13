@@ -1,6 +1,7 @@
 import 'package:fe/main.dart';
 import 'package:fe/models/question.dart';
 import 'package:fe/repositories/question_repository.dart';
+import 'package:fe/widgets/hud_dialog.dart';
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
@@ -15,6 +16,7 @@ class _QuestionPageState extends State<QuestionPage> {
   QuestionDto? _question;
   bool _isLoading = true;
   String? _errorMessage;
+  final TextEditingController _answerController = TextEditingController();
 
   @override
   void initState() {
@@ -22,7 +24,18 @@ class _QuestionPageState extends State<QuestionPage> {
     _loadQuestion();
   }
 
+  @override
+  void dispose() {
+    _answerController.dispose();
+    super.dispose();
+  }
+
   Future<void> _loadQuestion() async {
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+
     try {
       final question = await getIt<QuestionRepository>().getFirstPosition();
       setState(() {
@@ -35,6 +48,67 @@ class _QuestionPageState extends State<QuestionPage> {
         _isLoading = false;
       });
     }
+  }
+
+  Future<void> _checkAnswer() async {
+    if (_question == null) return;
+
+    final userAnswer = _answerController.text.trim().toLowerCase();
+    final correctAnswer = _question!.correctAnswer.trim().toLowerCase();
+
+    if (userAnswer == correctAnswer) {
+      try {
+        await getIt<QuestionRepository>().setResolved(_question!.id);
+        if (mounted) {
+          _showAccessGrantedDialog();
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Errore durante il salvataggio: $e")),
+          );
+        }
+      }
+    } else {
+      _showAccessDeniedDialog();
+    }
+  }
+
+  void _showAccessGrantedDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => HudDialog(
+        accentColor: AppColors.tertiary,
+        title: 'ACCESS GRANTED',
+        subtitle: 'Codice Corretto!',
+        message: 'Procedi al prossimo settore. Il segnale si sta rafforzando.',
+        technicalCode: 'SEC-AUTH-0492',
+        buttonText: 'PROSSIMO ENIGMA',
+        icon: Icons.check_circle,
+        onButtonPressed: () {
+          Navigator.of(context).pop();
+          _answerController.clear();
+          _loadQuestion();
+        },
+      ),
+    );
+  }
+
+  void _showAccessDeniedDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => HudDialog(
+        accentColor: AppColors.secondary,
+        title: 'ACCESS DENIED',
+        subtitle: 'Codice Errato',
+        message: 'Ritenta, l\'obiettivo è ancora protetto.',
+        buttonText: 'RIPROVA',
+        icon: Icons.gpp_bad,
+        isSuccess: false,
+        onButtonPressed: () => Navigator.of(context).pop(),
+      ),
+    );
   }
 
   @override
@@ -85,7 +159,7 @@ class _QuestionPageState extends State<QuestionPage> {
           ),
         ],
       ),
-      bottomNavigationBar: _buildBottomNavBar(themeData),
+      //bottomNavigationBar: _buildBottomNavBar(themeData),
     );
   }
 
@@ -242,6 +316,7 @@ class _QuestionPageState extends State<QuestionPage> {
 
   Widget _buildTerminalInput(ThemeData themeData) {
     return TextField(
+      controller: _answerController,
       style: themeData.textTheme.displayLarge?.copyWith(
         color: AppColors.tertiary,
         fontSize: 24,
@@ -274,7 +349,7 @@ class _QuestionPageState extends State<QuestionPage> {
           width: double.infinity,
           height: 70,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: _checkAnswer,
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
               foregroundColor: AppColors.onPrimaryFixed,

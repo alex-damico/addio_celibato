@@ -10,4 +10,6 @@ class QuestionRepository {
 
   Future<QuestionDto> getFirstPosition() => restClient.getFirstPosition();
 
+  Future<void> setResolved(int id) => restClient.setResolved(id.toString());
+
 }
