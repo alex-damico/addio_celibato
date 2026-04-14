@@ -7,7 +7,7 @@ public record CreateQuestionDto
 {
     public static Question fromDto(CreateQuestionDto dto) {
         return new Question(null, dto.position(), dto.intro(), dto.content(),
-                dto.correctAnswer(), false);
+                dto.correctAnswer(), false, false);
     }
 }
 

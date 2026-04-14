@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/000-create-schema.sql
   - include:
       file: db/changelog/001-create-tables.sql
+  - include:
+      file: db/changelog/002-insert-data.sql

@@ -28,4 +28,7 @@ public class Question {
 
     @Column(name = "is_resolved", nullable = false)
     private Boolean isResolved = false;
+
+    @Column(name = "is_last")
+    private Boolean isLast = false;
 }

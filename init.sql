@@ -4,7 +4,7 @@
 DO $$
 BEGIN
     IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'addio_celibato_app') THEN
-        CREATE ROLE addio_celibato_app WITH LOGIN PASSWORD 'password';
+        CREATE ROLE addio_celibato_app WITH LOGIN PASSWORD 'V4Q4y5cOpt7S';
         RAISE NOTICE 'Utente addio_celibato_app creato.';
     ELSE
         RAISE NOTICE 'Utente addio_celibato_app già esistente, salto creazione.';
