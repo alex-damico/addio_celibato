@@ -11,7 +11,7 @@ RUN flutter config --enable-web
 RUN flutter pub get
 
 # Build web (release)
-RUN flutter build web
+RUN flutter build web --release
 
 
 FROM nginx:alpine
