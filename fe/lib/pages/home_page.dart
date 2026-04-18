@@ -29,8 +29,8 @@ class _HomePageState extends State<HomePage> {
           Positioned.fill(
             child: Opacity(
               opacity: 0.3,
-              child: Image.network(
-                'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80',
+              child: Image.asset(
+                'assets/images/background.jpg',
                 fit: BoxFit.cover,
               ),
             ),

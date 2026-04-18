@@ -6,6 +6,7 @@ import 'package:fe/repositories/question_repository.dart';
 import 'package:fe/widgets/access_status_dialog.dart';
 import 'package:fe/widgets/hint_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import '../app_colors.dart';
 
 class QuestionPage extends StatefulWidget {
@@ -16,6 +17,8 @@ class QuestionPage extends StatefulWidget {
 }
 
 class _QuestionPageState extends State<QuestionPage> {
+  final log = Logger('QuestionPage');
+
   QuestionDto? _question;
   bool _isLoading = true;
   String? _errorMessage;
@@ -49,7 +52,7 @@ class _QuestionPageState extends State<QuestionPage> {
       if (e.response?.statusCode == 404) {
         if (mounted) {
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const CompletePage()),
+            MaterialPageRoute(builder: (context) => CompletePage()),
           );
         }
       } else {
@@ -58,7 +61,8 @@ class _QuestionPageState extends State<QuestionPage> {
           _isLoading = false;
         });
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      log.severe("Errore durante il caricamento della domanda", e, stackTrace);
       setState(() {
         _errorMessage = "Errore inatteso: $e";
         _isLoading = false;
@@ -78,7 +82,8 @@ class _QuestionPageState extends State<QuestionPage> {
         if (mounted) {
           _showAccessGrantedDialog();
         }
-      } catch (e) {
+      } catch (e, stackTrace) {
+        log.severe("Errore durante il salvataggio della risposta", e, stackTrace);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Errore durante il salvataggio: $e")),
@@ -110,7 +115,7 @@ class _QuestionPageState extends State<QuestionPage> {
           Navigator.of(context).pop();
           if (isLast) {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const CompletePage()),
+              MaterialPageRoute(builder: (context) => CompletePage()),
             );
           } else {
             _answerController.clear();
@@ -166,7 +171,8 @@ class _QuestionPageState extends State<QuestionPage> {
           SnackBar(content: Text(message)),
         );
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      log.severe("Errore durante il recupero dell'aiuto", e, stackTrace);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Impossibile recuperare l'aiuto: $e")),

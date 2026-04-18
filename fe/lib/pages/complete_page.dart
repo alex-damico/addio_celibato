@@ -1,8 +1,11 @@
 import 'package:fe/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 
 class CompletePage extends StatelessWidget {
-  const CompletePage({super.key});
+  final log = Logger('CompletePage');
+  
+  CompletePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +99,7 @@ class CompletePage extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: AppColors.primaryFixedDim..withValues(alpha: 0.2),
+              color: AppColors.primaryFixedDim.withValues(alpha: 0.2),
               width: 4,
               style: BorderStyle.none,
             ),
@@ -231,7 +234,7 @@ class CompletePage extends StatelessWidget {
               width: 250,
               height: 60,
               decoration: BoxDecoration(
-                border: Border.all(color: AppColors.primaryFixedDim..withValues(alpha: 0.4), width: 2),
+                border: Border.all(color: AppColors.primaryFixedDim.withValues(alpha: 0.4), width: 2),
               ),
             ),
           ),
