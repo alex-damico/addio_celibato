@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:fe/main.dart';
 import 'package:fe/models/question.dart';
 import 'package:fe/pages/complete_page.dart';
+import 'package:fe/repositories/hint_repository.dart';
 import 'package:fe/repositories/question_repository.dart';
 import 'package:fe/widgets/access_status_dialog.dart';
 import 'package:fe/widgets/hint_dialog.dart';
@@ -146,7 +147,7 @@ class _QuestionPageState extends State<QuestionPage> {
     if (_question == null) return;
 
     try {
-      final hint = await getIt<QuestionRepository>().getFirstHintByQuestionId(_question!.id);
+      final hint = await getIt<HintRepository>().getFirstHintByQuestionId(_question!.id);
 
       if (mounted) {
         showDialog(
@@ -155,7 +156,7 @@ class _QuestionPageState extends State<QuestionPage> {
             hintId: hint.id,
             hint: hint.content,
             onReceived: () async {
-              await getIt<QuestionRepository>().setHintUnlocked(hint.id);
+              await getIt<HintRepository>().setHintUnlocked(hint.id);
               if (mounted) Navigator.of(context).pop();
             },
           ),
