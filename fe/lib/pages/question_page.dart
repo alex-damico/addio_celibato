@@ -45,9 +45,22 @@ class _QuestionPageState extends State<QuestionPage> {
         _question = question;
         _isLoading = false;
       });
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        if (mounted) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const CompletePage()),
+          );
+        }
+      } else {
+        setState(() {
+          _errorMessage = "Errore di rete: ${e.message}";
+          _isLoading = false;
+        });
+      }
     } catch (e) {
       setState(() {
-        _errorMessage = e.toString();
+        _errorMessage = "Errore inatteso: $e";
         _isLoading = false;
       });
     }
