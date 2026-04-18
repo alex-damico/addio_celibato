@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
-class HudDialog extends StatelessWidget {
+class AccessStatusDialog extends StatelessWidget {
   final Color accentColor;
   final String title;
   final String subtitle;
@@ -13,7 +13,7 @@ class HudDialog extends StatelessWidget {
   final VoidCallback onButtonPressed;
   final bool isSuccess;
 
-  const HudDialog({
+  const AccessStatusDialog({
     super.key,
     required this.accentColor,
     required this.title,

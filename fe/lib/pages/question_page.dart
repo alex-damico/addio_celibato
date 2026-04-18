@@ -1,7 +1,8 @@
 import 'package:fe/main.dart';
 import 'package:fe/models/question.dart';
 import 'package:fe/repositories/question_repository.dart';
-import 'package:fe/widgets/hud_dialog.dart';
+import 'package:fe/widgets/access_status_dialog.dart';
+import 'package:fe/widgets/hint_dialog.dart';
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
@@ -78,7 +79,7 @@ class _QuestionPageState extends State<QuestionPage> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => HudDialog(
+      builder: (context) => AccessStatusDialog(
         accentColor: AppColors.tertiary,
         title: 'ACCESS GRANTED',
         subtitle: 'Codice Corretto!',
@@ -98,7 +99,7 @@ class _QuestionPageState extends State<QuestionPage> {
   void _showAccessDeniedDialog() {
     showDialog(
       context: context,
-      builder: (context) => HudDialog(
+      builder: (context) => AccessStatusDialog(
         accentColor: AppColors.secondary,
         title: 'ACCESS DENIED',
         subtitle: 'Codice Errato',
@@ -109,6 +110,30 @@ class _QuestionPageState extends State<QuestionPage> {
         onButtonPressed: () => Navigator.of(context).pop(),
       ),
     );
+  }
+
+  void _showIntelDialog() async {
+    if (_question == null) return;
+
+    try {
+      final hint = await getIt<QuestionRepository>().getFirstHintByQuestionId(_question!.id);
+
+      if (mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => HintDialog(
+            hint: hint.content,
+            onClose: () => Navigator.of(context).pop(),
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Impossibile recuperare l'intel: $e")),
+        );
+      }
+    }
   }
 
   @override
@@ -377,7 +402,7 @@ class _QuestionPageState extends State<QuestionPage> {
           width: double.infinity,
           height: 70,
           child: OutlinedButton(
-            onPressed: () {},
+            onPressed: _showIntelDialog,
             style: OutlinedButton.styleFrom(
               side: BorderSide(color: AppColors.primary.withValues(alpha: 0.2), width: 2),
               backgroundColor: AppColors.surfaceContainerHighest,

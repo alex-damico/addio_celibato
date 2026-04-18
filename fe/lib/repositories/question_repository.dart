@@ -1,4 +1,5 @@
 
+import 'package:fe/models/hint.dart';
 import 'package:fe/models/question.dart';
 
 import '../network/rest_client.dart';
@@ -11,5 +12,8 @@ class QuestionRepository {
   Future<QuestionDto> getFirstPosition() => restClient.getFirstPosition();
 
   Future<void> setResolved(int id) => restClient.setResolved(id.toString());
+
+  Future<HintDto> getFirstHintByQuestionId(int questionId) => 
+      restClient.getFirstHintByQuestionId(questionId);
 
 }

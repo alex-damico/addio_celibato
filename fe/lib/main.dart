@@ -3,6 +3,7 @@ import 'package:fe/network/rest_client.dart';
 import 'package:fe/pages/home_page.dart';
 import 'package:fe/repositories/question_repository.dart';
 import 'package:fe/service/admin_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -14,7 +15,13 @@ GetIt getIt = GetIt.instance;
 
 void setupLocator() {
   final dio = Dio();
-  final restClient = RestClient(dio);
+  
+  String baseUrl = '/api';
+  if (kDebugMode) {
+    baseUrl = 'http://localhost:8080/api';
+  }
+  
+  final restClient = RestClient(dio, baseUrl: baseUrl);
 
   getIt.registerLazySingleton<QuestionRepository>(
     () => QuestionRepository(restClient: restClient),
