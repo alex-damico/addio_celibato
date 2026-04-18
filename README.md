@@ -2,6 +2,10 @@
 link: http://localhost:5050/
 
 # Docker-compose
-- Per sviluppo ```docker-compose up -d```
-- Per cloud ```docker-compose --profile apps up -d```
+- Per sviluppo 
+    - Avviare ```docker-compose up -d```
+    - Stoppare ```docker-compose down```
+- Per cloud
+    - Avviare ```docker-compose --profile apps up -d```
+    - Stoppare ```docker-compose --profile apps down```
 
