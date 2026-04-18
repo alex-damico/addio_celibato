@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:fe/main.dart';
 import 'package:fe/models/question.dart';
 import 'package:fe/pages/complete_page.dart';
+import 'package:fe/pages/create_task_page.dart';
 import 'package:fe/pages/task_page.dart';
 import 'package:fe/repositories/hint_repository.dart';
 import 'package:fe/repositories/question_repository.dart';
@@ -313,8 +314,8 @@ class _QuestionPageState extends State<QuestionPage> {
                 ]),
                 child: Opacity(
                   opacity: 0.6,
-                  child: Image.network(
-                    'https://lh3.googleusercontent.com/aida-public/AB6AXuA4lLxrGpStKlG0cWYyDIPzZPdZj6QTCV9rKNjW-ju7CjKXWSdvuG6JOskf9s7lbpIwG-HXyxWAMZNThIC8QhRr0IXukaxu3YRZFraysLxtgrhjtPI8bssW326U2G0QlLLcd6hi3N8tpPFg7JBbH7GOePOd9_FqnFPFGi4-Rb_aYQqsaNayGj1jrJGzvYxEBm0mIO7oFb_-pesuvKzm07IjdweIiAUVGh40Qb9dTQa1KYPLPNZIw4FM1tP5dmWcqxM4pB6VunkzjBwp',
+                  child: Image.asset(
+                    'assets/images/question.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -495,6 +496,11 @@ class _QuestionPageState extends State<QuestionPage> {
           _buildNavItem(Icons.description, 'PEGNI', false, themeData, () {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const TaskPage()),
+            );
+          }),
+          _buildNavItem(Icons.add_circle_outline, 'CREA PEGNO', false, themeData, () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const CreateTaskPage()),
             );
           }),
         ],

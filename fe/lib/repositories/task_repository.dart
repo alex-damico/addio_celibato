@@ -1,4 +1,5 @@
 import 'package:fe/models/task.dart';
+import 'package:fe/models/task_create.dart';
 
 import '../models/tasks.dart';
 import '../network/rest_client.dart';
@@ -11,5 +12,7 @@ class TaskRepository {
   Future<TasksDto> getAll() => restClient.getAllTasks();
 
   Future<TaskDto> sendTask(int id) => restClient.sendTask(id);
+
+  Future<int> save(TaskCreateDto taskDto) => restClient.saveTask(taskDto);
 
 }

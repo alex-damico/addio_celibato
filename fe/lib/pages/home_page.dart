@@ -17,13 +17,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final log = Logger('HomePage');
+  int _secretCounter = 0;
 
   @override
   Widget build(BuildContext context) {
-    int secretCounter = 0;
-
     return Scaffold(
-      appBar: _buildAppBar(Theme.of(context), secretCounter),
+      appBar: _buildAppBar(Theme.of(context)),
       body: Stack(
         children: [
           Positioned.fill(
@@ -56,29 +55,40 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  PreferredSizeWidget _buildAppBar(ThemeData themaData, int secretCounter) {
+  PreferredSizeWidget _buildAppBar(ThemeData themaData) {
     return AppBar(
       backgroundColor: AppColors.headerBackground,
       elevation: 0,
-      title: Row(
-        children: [
-          const Icon(Icons.terminal, color: AppColors.text),
-          const SizedBox(width: 12),
-          GestureDetector(
-            onTap: () {
-              secretCounter++;
-              if (secretCounter == 5) {
-                getIt<AdminService>().toggleAdmin();
-                secretCounter = 0;
-                log.info("Modalità Admin Attivata!");
-              }
-            },
-            child: Text(
-              'MISSION: ESCAPE',
-              style: themaData.textTheme.displayLarge,
-            ),
-          ),
-        ],
+      title: ListenableBuilder(
+        listenable: getIt<AdminService>(),
+        builder: (context, child) {
+          final isAdmin = getIt<AdminService>().isAdmin;
+          return Row(
+            children: [
+              Icon(
+                Icons.terminal,
+                color: isAdmin ? AppColors.secondary : AppColors.text,
+              ),
+              const SizedBox(width: 12),
+              GestureDetector(
+                onTap: () {
+                  _secretCounter++;
+                  if (_secretCounter == 5) {
+                    getIt<AdminService>().toggleAdmin();
+                    _secretCounter = 0;
+                    log.info("Modalità Admin Attivata!");
+                  }
+                },
+                child: Text(
+                  'MISSION: ESCAPE',
+                  style: themaData.textTheme.displayLarge?.copyWith(
+                    color: isAdmin ? AppColors.secondary : AppColors.text,
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
       actions: [
         Center(
