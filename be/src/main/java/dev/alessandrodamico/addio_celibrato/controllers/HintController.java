@@ -22,20 +22,20 @@ public class HintController {
         this.service = service;
     }
 
-    @GetMapping("firstPosition")
+    @GetMapping("/{questionId}/firstPosition")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = HintDto.class)) }),
+            @ApiResponse(responseCode = "200", content = {@Content(mediaType = "application/json",
+                    schema = @Schema(implementation = HintDto.class))}),
             @ApiResponse(responseCode = "400", content = @Content),
-            @ApiResponse(responseCode = "404", content = @Content) })
-    public ResponseEntity<HintDto> findFirstPosition() {
-        return ResponseEntity.ok(this.service.findFirstPosition());
+            @ApiResponse(responseCode = "404", content = @Content)})
+    public ResponseEntity<HintDto> findFirstPosition(@PathVariable Long questionId) {
+        return ResponseEntity.ok(this.service.findFirstPosition(questionId));
     }
 
     @PostMapping("/")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", content = { @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = Long.class)) }),
+            @ApiResponse(responseCode = "201", content = {@Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Long.class))}),
             @ApiResponse(responseCode = "400", content = @Content),
             @ApiResponse(responseCode = "403", content = @Content)
     })
@@ -45,16 +45,14 @@ public class HintController {
 
     @PatchMapping("/{id}/isUnlocked")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = HintDto.class)) }),
+            @ApiResponse(responseCode = "200", content = @Content),
             @ApiResponse(responseCode = "400", content = @Content),
             @ApiResponse(responseCode = "404", content = @Content),
             @ApiResponse(responseCode = "409", content = @Content)
     })
     public ResponseEntity<HintDto> updateIsUnlocked(
-            @PathVariable Long id,
-            @RequestBody UpdateHintDto updateHintDto) {
-        return ResponseEntity.ok(this.service.update(id, updateHintDto.isUnlocked()));
+            @PathVariable Long id) {
+        return ResponseEntity.ok(this.service.updateIsUnlocked(id));
     }
 
 }

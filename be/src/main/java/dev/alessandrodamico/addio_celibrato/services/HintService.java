@@ -30,15 +30,15 @@ public class HintService {
         }
     }
 
-    public HintDto update(Long id, boolean isUnlocked) {
+    public HintDto updateIsUnlocked(Long id) {
         Hint entity = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Domanda non trovata"));
-        entity.setIsUnlocked(isUnlocked);
+        entity.setIsUnlocked(true);
         return HintDto.toDto(repository.save(entity));
     }
 
-    public HintDto findFirstPosition() {
-        return this.repository.findFirstByIsUnlockedIsFalseOrderByPositionAsc().map(HintDto::toDto)
+    public HintDto findFirstPosition(Long questionId) {
+        return this.repository.findFirstByQuestionIdAndIsUnlockedFalseOrderByPositionAsc(questionId).map(HintDto::toDto)
                 .orElseThrow(EntityNotFoundException::new);
     }
 }
