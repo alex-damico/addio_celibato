@@ -2,6 +2,7 @@ import 'package:fe/main.dart';
 import 'package:fe/models/task_create.dart';
 import 'package:fe/repositories/task_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import '../app_colors.dart';
 
 class CreateTaskPage extends StatefulWidget {
@@ -12,6 +13,7 @@ class CreateTaskPage extends StatefulWidget {
 }
 
 class _CreateTaskPageState extends State<CreateTaskPage> {
+  final log = Logger('CreateTaskPage');
   final TextEditingController _contentController = TextEditingController();
   bool _isSaving = false;
 
@@ -32,13 +34,15 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
     try {
       final create = TaskCreateDto(content: content);
       await getIt<TaskRepository>().save(create);
+      log.info("Pegno creato con successo: $content");
       if (mounted) {
         Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Pegno creato con successo')),
         );
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      log.severe("Errore durante il salvataggio del pegno", e, stackTrace);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Errore durante il salvataggio: $e')),
