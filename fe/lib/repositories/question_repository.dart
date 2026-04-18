@@ -16,4 +16,7 @@ class QuestionRepository {
   Future<HintDto> getFirstHintByQuestionId(int questionId) => 
       restClient.getFirstHintByQuestionId(questionId);
 
+  Future<void> setHintUnlocked(int hintId) => 
+      restClient.setHintUnlocked(hintId.toString());
+
 }

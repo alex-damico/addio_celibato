@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
 class HintDialog extends StatelessWidget {
+  final int hintId;
   final String hint;
-  final VoidCallback onClose;
+  final VoidCallback onReceived;
 
   const HintDialog({
     super.key,
+    required this.hintId,
     required this.hint,
-    required this.onClose,
+    required this.onReceived,
   });
 
   @override
@@ -242,14 +244,14 @@ class HintDialog extends StatelessWidget {
           width: double.infinity,
           height: 60,
           child: ElevatedButton(
-            onPressed: onClose,
+            onPressed: onReceived,
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
               foregroundColor: AppColors.background,
               shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
               elevation: 0,
             ),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
@@ -260,28 +262,8 @@ class HintDialog extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
-                const Icon(Icons.chevron_right),
+                Icon(Icons.chevron_right),
               ],
-            ),
-          ),
-        ),
-        const SizedBox(height: 16),
-        SizedBox(
-          width: double.infinity,
-          height: 50,
-          child: OutlinedButton(
-            onPressed: onClose,
-            style: OutlinedButton.styleFrom(
-              side: const BorderSide(color: AppColors.outlineVariant, width: 2),
-              foregroundColor: AppColors.onSurfaceVariant,
-              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-            ),
-            child: const Text(
-              'TORNA AL QUESITO',
-              style: TextStyle(
-                letterSpacing: 2,
-                fontSize: 12,
-              ),
             ),
           ),
         ),

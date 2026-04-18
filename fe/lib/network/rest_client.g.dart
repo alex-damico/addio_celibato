@@ -12,7 +12,7 @@ part of 'rest_client.dart';
 
 class _RestClient implements RestClient {
   _RestClient(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'http://localhost:8080/api';
+    baseUrl ??= '/api';
   }
 
   final Dio _dio;
@@ -92,6 +92,25 @@ class _RestClient implements RestClient {
       rethrow;
     }
     return _value;
+  }
+
+  @override
+  Future<void> setHintUnlocked(String id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<void>(
+      Options(method: 'PATCH', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/hints/${id}/isUnlocked',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

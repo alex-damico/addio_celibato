@@ -10,6 +10,7 @@ class QuestionDto {
   final String content;
   final String correctAnswer;
   final bool isResolved;
+  final bool isLast;
 
   QuestionDto({
     required this.id,
@@ -18,6 +19,7 @@ class QuestionDto {
     required this.content,
     required this.correctAnswer,
     required this.isResolved,
+    required this.isLast,
   });
 
   factory QuestionDto.fromJson(Map<String, dynamic> json) =>

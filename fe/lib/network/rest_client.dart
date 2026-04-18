@@ -20,4 +20,7 @@ abstract class RestClient {
   @GET('/hints/{questionId}/firstPosition')
   Future<HintDto> getFirstHintByQuestionId(@Path() int questionId);
 
+  @PATCH('/hints/{id}/isUnlocked')
+  Future<void> setHintUnlocked(@Path() String id);
+
 }

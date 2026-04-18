@@ -13,6 +13,7 @@ QuestionDto _$QuestionDtoFromJson(Map<String, dynamic> json) => QuestionDto(
   content: json['content'] as String,
   correctAnswer: json['correctAnswer'] as String,
   isResolved: json['isResolved'] as bool,
+  isLast: json['isLast'] as bool,
 );
 
 Map<String, dynamic> _$QuestionDtoToJson(QuestionDto instance) =>
@@ -23,4 +24,5 @@ Map<String, dynamic> _$QuestionDtoToJson(QuestionDto instance) =>
       'content': instance.content,
       'correctAnswer': instance.correctAnswer,
       'isResolved': instance.isResolved,
+      'isLast': instance.isLast,
     };

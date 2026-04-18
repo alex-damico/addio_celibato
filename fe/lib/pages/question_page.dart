@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:fe/main.dart';
 import 'package:fe/models/question.dart';
+import 'package:fe/pages/complete_page.dart';
 import 'package:fe/repositories/question_repository.dart';
 import 'package:fe/widgets/access_status_dialog.dart';
 import 'package:fe/widgets/hint_dialog.dart';
@@ -76,6 +78,8 @@ class _QuestionPageState extends State<QuestionPage> {
   }
 
   void _showAccessGrantedDialog() {
+    final bool isLast = _question?.isLast ?? false;
+
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -83,14 +87,22 @@ class _QuestionPageState extends State<QuestionPage> {
         accentColor: AppColors.tertiary,
         title: 'ACCESS GRANTED',
         subtitle: 'Codice Corretto!',
-        message: 'Procedi al prossimo settore. Il segnale si sta rafforzando.',
+        message: isLast
+            ? 'Missione completata. L\'obiettivo è al sicuro.'
+            : 'Procedi al prossimo settore. Il segnale si sta rafforzando.',
         technicalCode: 'SEC-AUTH-0492',
-        buttonText: 'PROSSIMO ENIGMA',
+        buttonText: isLast ? 'FINE MISSIONE' : 'PROSSIMO ENIGMA',
         icon: Icons.check_circle,
         onButtonPressed: () {
           Navigator.of(context).pop();
-          _answerController.clear();
-          _loadQuestion();
+          if (isLast) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const CompletePage()),
+            );
+          } else {
+            _answerController.clear();
+            _loadQuestion();
+          }
         },
       ),
     );
@@ -122,15 +134,29 @@ class _QuestionPageState extends State<QuestionPage> {
         showDialog(
           context: context,
           builder: (context) => HintDialog(
+            hintId: hint.id,
             hint: hint.content,
-            onClose: () => Navigator.of(context).pop(),
+            onReceived: () async {
+              await getIt<QuestionRepository>().setHintUnlocked(hint.id);
+              if (mounted) Navigator.of(context).pop();
+            },
           ),
+        );
+      }
+    } on DioException catch (e) {
+      if (mounted) {
+        String message = "Impossibile recuperare l'aiuto: $e";
+        if (e.response?.statusCode == 404) {
+          message = "Hai esaurito tutti gli aiuti disponibili per questo obiettivo.";
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Impossibile recuperare l'intel: $e")),
+          SnackBar(content: Text("Impossibile recuperare l'aiuto: $e")),
         );
       }
     }
