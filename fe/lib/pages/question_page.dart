@@ -2,10 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:fe/main.dart';
 import 'package:fe/models/question.dart';
 import 'package:fe/pages/complete_page.dart';
+import 'package:fe/pages/task_page.dart';
 import 'package:fe/repositories/hint_repository.dart';
 import 'package:fe/repositories/question_repository.dart';
 import 'package:fe/widgets/access_status_dialog.dart';
 import 'package:fe/widgets/hint_dialog.dart';
+import 'package:fe/service/admin_service.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import '../app_colors.dart';
@@ -230,7 +232,14 @@ class _QuestionPageState extends State<QuestionPage> {
           ),
         ],
       ),
-      //bottomNavigationBar: _buildBottomNavBar(themeData),
+      bottomNavigationBar: ListenableBuilder(
+        listenable: getIt<AdminService>(),
+        builder: (context, child) {
+          return getIt<AdminService>().isAdmin
+              ? _buildBottomNavBar(themeData)
+              : const SizedBox.shrink();
+        },
+      ),
     );
   }
 
@@ -483,21 +492,23 @@ class _QuestionPageState extends State<QuestionPage> {
       ),
       child: Row(
         children: [
-          _buildNavItem(Icons.description, 'INTEL', false, themeData),
-          _buildNavItem(Icons.extension, 'PUZZLE', true, themeData),
-          _buildNavItem(Icons.leaderboard, 'STATS', false, themeData),
+          _buildNavItem(Icons.description, 'PEGNI', false, themeData, () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const TaskPage()),
+            );
+          }),
         ],
       ),
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, bool isActive, ThemeData themeData) {
+  Widget _buildNavItem(IconData icon, String label, bool isActive, ThemeData themeData, VoidCallback onTap) {
     final activeColor = AppColors.background;
     final inactiveColor = AppColors.primary.withValues(alpha: 0.6);
 
     return Expanded(
       child: InkWell(
-        onTap: () {},
+        onTap: onTap,
         child: Container(
           color: isActive ? AppColors.text : Colors.transparent,
           child: Column(

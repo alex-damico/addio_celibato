@@ -3,6 +3,7 @@ import 'package:fe/network/rest_client.dart';
 import 'package:fe/pages/home_page.dart';
 import 'package:fe/repositories/hint_repository.dart';
 import 'package:fe/repositories/question_repository.dart';
+import 'package:fe/repositories/task_repository.dart';
 import 'package:fe/service/admin_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,10 @@ void setupLocator() {
 
   getIt.registerLazySingleton<HintRepository>(
         () => HintRepository(restClient: restClient),
+  );
+
+  getIt.registerLazySingleton<TaskRepository>(
+        () => TaskRepository(restClient: restClient),
   );
 
   getIt.registerSingleton<AdminService>(
