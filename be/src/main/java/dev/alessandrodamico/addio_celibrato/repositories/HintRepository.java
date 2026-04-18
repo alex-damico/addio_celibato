@@ -12,6 +12,6 @@ public interface HintRepository extends JpaRepository<Hint, Long> {
 
     boolean existsByPosition(Integer position);
 
-    Optional<Hint> findFirstByIsUnlockedIsFalseOrderByPositionAsc();
+    Optional<Hint> findFirstByQuestionIdAndIsUnlockedFalseOrderByPositionAsc(Long questionId);
 
 }

@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "hints")
+@Table(name = "hint")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,7 +16,7 @@ public class Hint {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "position", unique = true, nullable = false)
+    @Column(name = "position", nullable = false)
     private Integer position;
 
     @Column(columnDefinition = "text")
