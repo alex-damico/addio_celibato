@@ -17,12 +17,17 @@ GetIt getIt = GetIt.instance;
 
 void setupLocator() {
   final dio = Dio();
-  
+
   String baseUrl = '/api';
   if (kDebugMode) {
-    baseUrl = 'http://localhost:8080/api';
+    if (kIsWeb) {
+      baseUrl = 'http://localhost:8080/api';
+    } else {
+      //baseUrl = 'http://10.0.2.2:8080/api';
+      baseUrl = 'http://192.168.178.114:8080/api';
+    }
   }
-  
+
   final restClient = RestClient(dio, baseUrl: baseUrl);
 
   getIt.registerLazySingleton<QuestionRepository>(
@@ -30,17 +35,14 @@ void setupLocator() {
   );
 
   getIt.registerLazySingleton<HintRepository>(
-        () => HintRepository(restClient: restClient),
+    () => HintRepository(restClient: restClient),
   );
 
   getIt.registerLazySingleton<TaskRepository>(
-        () => TaskRepository(restClient: restClient),
+    () => TaskRepository(restClient: restClient),
   );
 
-  getIt.registerSingleton<AdminService>(
-    AdminService(),
-    signalsReady: true,
-  );
+  getIt.registerSingleton<AdminService>(AdminService(), signalsReady: true);
 }
 
 void main() {
@@ -77,7 +79,9 @@ class MyApp extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primaryContainer,
             foregroundColor: AppColors.onPrimaryFixed,
-            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero,
+            ),
           ),
         ),
 
@@ -117,8 +121,7 @@ class MyApp extends StatelessWidget {
             height: 1.5,
             fontWeight: FontWeight.bold,
           ),
-
-        )
+        ),
       ),
       home: HomePage(),
     );

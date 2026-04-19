@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminService extends ChangeNotifier {
   bool _isAdmin = false;
+
   bool get isAdmin => _isAdmin;
 
   Future<void> init() async {

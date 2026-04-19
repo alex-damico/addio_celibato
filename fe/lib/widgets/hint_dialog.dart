@@ -29,7 +29,7 @@ class HintDialog extends StatelessWidget {
               ),
             ),
           ),
-          
+
           Center(
             child: Container(
               width: double.infinity,
@@ -64,23 +64,14 @@ class HintDialog extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24),
       decoration: const BoxDecoration(
         color: AppColors.surfaceContainerHighest,
-        border: Border(
-          bottom: BorderSide(
-            color: Color(0x33F3FFCA),
-            width: 2,
-          ),
-        ),
+        border: Border(bottom: BorderSide(color: Color(0x33F3FFCA), width: 2)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              const Icon(
-                Icons.lightbulb,
-                color: AppColors.primary,
-                size: 24,
-              ),
+              const Icon(Icons.lightbulb, color: AppColors.primary, size: 24),
               const SizedBox(width: 12),
               Text(
                 'RICHIESTA INTEL',
@@ -131,9 +122,7 @@ class HintDialog extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.all(24),
-          decoration: const BoxDecoration(
-            color: Color(0xFF111417),
-          ),
+          decoration: const BoxDecoration(color: Color(0xFF111417)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -214,11 +203,7 @@ class HintDialog extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(
-            Icons.terminal,
-            color: AppColors.tertiary,
-            size: 20,
-          ),
+          const Icon(Icons.terminal, color: AppColors.tertiary, size: 20),
           const SizedBox(width: 16),
           const Expanded(
             child: Text(
@@ -248,7 +233,9 @@ class HintDialog extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
               foregroundColor: AppColors.background,
-              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
+              ),
               elevation: 0,
             ),
             child: const Row(
@@ -282,10 +269,7 @@ class HintDialog extends StatelessWidget {
             flex: 1,
             child: Container(color: AppColors.primary.withValues(alpha: 0.4)),
           ),
-          Expanded(
-            flex: 2,
-            child: Container(),
-          ),
+          Expanded(flex: 2, child: Container()),
         ],
       ),
     );

@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:fe/models/hint.dart';
 import 'package:fe/models/question.dart';
@@ -35,5 +34,4 @@ abstract class RestClient {
 
   @POST('/tasks/')
   Future<int> saveTask(@Body() TaskCreateDto task);
-
 }

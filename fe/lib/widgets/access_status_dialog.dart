@@ -36,7 +36,9 @@ class AccessStatusDialog extends StatelessWidget {
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-              child: Container(color: AppColors.background.withValues(alpha: 0.8)),
+              child: Container(
+                color: AppColors.background.withValues(alpha: 0.8),
+              ),
             ),
           ),
           Center(
@@ -44,12 +46,17 @@ class AccessStatusDialog extends StatelessWidget {
               width: 340,
               decoration: BoxDecoration(
                 color: AppColors.surfaceContainer,
-                border: isSuccess 
-                  ? Border(top: BorderSide(color: accentColor, width: 4))
-                  : Border.all(color: accentColor.withValues(alpha: 0.3), width: 2),
+                border: isSuccess
+                    ? Border(top: BorderSide(color: accentColor, width: 4))
+                    : Border.all(
+                        color: accentColor.withValues(alpha: 0.3),
+                        width: 2,
+                      ),
                 boxShadow: [
                   BoxShadow(
-                    color: accentColor.withValues(alpha: isSuccess ? 0.15 : 0.3),
+                    color: accentColor.withValues(
+                      alpha: isSuccess ? 0.15 : 0.3,
+                    ),
                     blurRadius: isSuccess ? 50 : 20,
                   ),
                 ],
@@ -67,7 +74,9 @@ class AccessStatusDialog extends StatelessWidget {
                         Text(
                           title,
                           textAlign: TextAlign.center,
-                          style: AppColors.hudTitle.copyWith(color: accentColor),
+                          style: AppColors.hudTitle.copyWith(
+                            color: accentColor,
+                          ),
                         ),
                         if (isSuccess) ...[
                           const SizedBox(height: 8),
@@ -131,12 +140,8 @@ class AccessStatusDialog extends StatelessWidget {
     return Container(
       width: 96,
       height: 96,
-      decoration: BoxDecoration(
-        color: accentColor.withValues(alpha: 0.1),
-      ),
-      child: Center(
-        child: Icon(icon, size: 64, color: accentColor),
-      ),
+      decoration: BoxDecoration(color: accentColor.withValues(alpha: 0.1)),
+      child: Center(child: Icon(icon, size: 64, color: accentColor)),
     );
   }
 
@@ -155,13 +160,16 @@ class AccessStatusDialog extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(buttonText, style: AppColors.hudLabel.copyWith(
-              color: isSuccess ? Colors.black : Colors.white
-            )),
+            Text(
+              buttonText,
+              style: AppColors.hudLabel.copyWith(
+                color: isSuccess ? Colors.black : Colors.white,
+              ),
+            ),
             if (isSuccess) ...[
               const SizedBox(width: 8),
               const Icon(Icons.arrow_forward, size: 16),
-            ]
+            ],
           ],
         ),
       ),

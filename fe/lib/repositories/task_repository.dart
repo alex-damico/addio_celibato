@@ -14,5 +14,4 @@ class TaskRepository {
   Future<TaskDto> sendTask(int id) => restClient.sendTask(id);
 
   Future<int> save(TaskCreateDto taskDto) => restClient.saveTask(taskDto);
-
 }

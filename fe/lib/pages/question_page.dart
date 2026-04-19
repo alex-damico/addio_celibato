@@ -87,7 +87,11 @@ class _QuestionPageState extends State<QuestionPage> {
           _showAccessGrantedDialog();
         }
       } catch (e, stackTrace) {
-        log.severe("Errore durante il salvataggio della risposta", e, stackTrace);
+        log.severe(
+          "Errore durante il salvataggio della risposta",
+          e,
+          stackTrace,
+        );
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Errore durante il salvataggio: $e")),
@@ -150,7 +154,9 @@ class _QuestionPageState extends State<QuestionPage> {
     if (_question == null) return;
 
     try {
-      final hint = await getIt<HintRepository>().getFirstHintByQuestionId(_question!.id);
+      final hint = await getIt<HintRepository>().getFirstHintByQuestionId(
+        _question!.id,
+      );
 
       if (mounted) {
         showDialog(
@@ -169,11 +175,12 @@ class _QuestionPageState extends State<QuestionPage> {
       if (mounted) {
         String message = "Impossibile recuperare l'aiuto: $e";
         if (e.response?.statusCode == 404) {
-          message = "Hai esaurito tutti gli aiuti disponibili per questo obiettivo.";
+          message =
+              "Hai esaurito tutti gli aiuti disponibili per questo obiettivo.";
         }
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(message)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(message)));
       }
     } catch (e, stackTrace) {
       log.severe("Errore durante il recupero dell'aiuto", e, stackTrace);
@@ -200,7 +207,10 @@ class _QuestionPageState extends State<QuestionPage> {
     if (_errorMessage != null) {
       return Scaffold(
         body: Center(
-          child: Text("Error: $_errorMessage", style: const TextStyle(color: Colors.red)),
+          child: Text(
+            "Error: $_errorMessage",
+            style: const TextStyle(color: Colors.red),
+          ),
         ),
       );
     }
@@ -255,10 +265,7 @@ class _QuestionPageState extends State<QuestionPage> {
         children: [
           const Icon(Icons.terminal, color: AppColors.text),
           const SizedBox(width: 12),
-          Text(
-            'MISSION: ESCAPE',
-            style: themeData.textTheme.displayLarge,
-          ),
+          Text('MISSION: ESCAPE', style: themeData.textTheme.displayLarge),
         ],
       ),
     );
@@ -296,9 +303,7 @@ class _QuestionPageState extends State<QuestionPage> {
   Widget _buildVisualClue(ThemeData themeData) {
     return Container(
       decoration: const BoxDecoration(
-        border: Border(
-          left: BorderSide(color: AppColors.primary, width: 4),
-        ),
+        border: Border(left: BorderSide(color: AppColors.primary, width: 4)),
       ),
       child: AspectRatio(
         aspectRatio: 16 / 9,
@@ -307,10 +312,26 @@ class _QuestionPageState extends State<QuestionPage> {
             Positioned.fill(
               child: ColorFiltered(
                 colorFilter: const ColorFilter.matrix([
-                  0.2126, 0.7152, 0.0722, 0, 0,
-                  0.2126, 0.7152, 0.0722, 0, 0,
-                  0.2126, 0.7152, 0.0722, 0, 0,
-                  0,      0,      0,      1, 0,
+                  0.2126,
+                  0.7152,
+                  0.0722,
+                  0,
+                  0,
+                  0.2126,
+                  0.7152,
+                  0.0722,
+                  0,
+                  0,
+                  0.2126,
+                  0.7152,
+                  0.0722,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
                 ]),
                 child: Opacity(
                   opacity: 0.6,
@@ -323,9 +344,7 @@ class _QuestionPageState extends State<QuestionPage> {
             ),
             Positioned.fill(
               child: IgnorePointer(
-                child: CustomPaint(
-                  painter: ScanlinePainter(),
-                ),
+                child: CustomPaint(painter: ScanlinePainter()),
               ),
             ),
             Positioned(
@@ -434,7 +453,9 @@ class _QuestionPageState extends State<QuestionPage> {
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
               foregroundColor: AppColors.onPrimaryFixed,
-              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
+              ),
               elevation: 0,
             ),
             child: Row(
@@ -460,10 +481,15 @@ class _QuestionPageState extends State<QuestionPage> {
           child: OutlinedButton(
             onPressed: _showIntelDialog,
             style: OutlinedButton.styleFrom(
-              side: BorderSide(color: AppColors.primary.withValues(alpha: 0.2), width: 2),
+              side: BorderSide(
+                color: AppColors.primary.withValues(alpha: 0.2),
+                width: 2,
+              ),
               backgroundColor: AppColors.surfaceContainerHighest,
               foregroundColor: AppColors.primaryFixedDim,
-              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
+              ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -494,21 +520,33 @@ class _QuestionPageState extends State<QuestionPage> {
       child: Row(
         children: [
           _buildNavItem(Icons.description, 'PEGNI', false, themeData, () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const TaskPage()),
-            );
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (context) => const TaskPage()));
           }),
-          _buildNavItem(Icons.add_circle_outline, 'CREA PEGNO', false, themeData, () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const CreateTaskPage()),
-            );
-          }),
+          _buildNavItem(
+            Icons.add_circle_outline,
+            'CREA PEGNO',
+            false,
+            themeData,
+            () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const CreateTaskPage()),
+              );
+            },
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, bool isActive, ThemeData themeData, VoidCallback onTap) {
+  Widget _buildNavItem(
+    IconData icon,
+    String label,
+    bool isActive,
+    ThemeData themeData,
+    VoidCallback onTap,
+  ) {
     final activeColor = AppColors.background;
     final inactiveColor = AppColors.primary.withValues(alpha: 0.6);
 
@@ -520,10 +558,7 @@ class _QuestionPageState extends State<QuestionPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                icon,
-                color: isActive ? activeColor : inactiveColor,
-              ),
+              Icon(icon, color: isActive ? activeColor : inactiveColor),
               const SizedBox(height: 4),
               Text(
                 label,
@@ -544,7 +579,7 @@ class ScanlinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = AppColors.text.withValues(alpha:  0.05)
+      ..color = AppColors.text.withValues(alpha: 0.05)
       ..strokeWidth = 2.0;
 
     for (double y = 0; y < size.height; y += 4) {

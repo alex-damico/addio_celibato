@@ -94,7 +94,10 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                 filled: true,
                 fillColor: AppColors.surfaceContainer,
                 enabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.outlineVariant, width: 2),
+                  borderSide: BorderSide(
+                    color: AppColors.outlineVariant,
+                    width: 2,
+                  ),
                 ),
                 focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: AppColors.primary, width: 2),
@@ -112,7 +115,9 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                   foregroundColor: AppColors.onPrimaryFixed,
                 ),
                 child: _isSaving
-                    ? const CircularProgressIndicator(color: AppColors.onPrimaryFixed)
+                    ? const CircularProgressIndicator(
+                        color: AppColors.onPrimaryFixed,
+                      )
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

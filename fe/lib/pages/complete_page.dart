@@ -4,7 +4,7 @@ import 'package:logging/logging.dart';
 
 class CompletePage extends StatelessWidget {
   final log = Logger('CompletePage');
-  
+
   CompletePage({super.key});
 
   @override
@@ -16,36 +16,37 @@ class CompletePage extends StatelessWidget {
           Positioned.fill(
             child: Opacity(
               opacity: 0.1,
-              child: CustomPaint(
-                painter: _ScanlinePainter(),
-              ),
+              child: CustomPaint(painter: _ScanlinePainter()),
             ),
           ),
-          
+
           SafeArea(
             child: Column(
               children: [
                 _buildAppBar(),
-                
+
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24.0,
+                        vertical: 40.0,
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const SizedBox(height: 20),
                           _buildBadge(),
-                          
+
                           const SizedBox(height: 48),
                           _buildHeadlines(),
-                          
+
                           const SizedBox(height: 40),
                           _buildMessageCard(),
-                          
+
                           const SizedBox(height: 48),
                           _buildActionButton(context),
-                          
+
                           const SizedBox(height: 40),
                         ],
                       ),
@@ -200,7 +201,11 @@ class CompletePage extends StatelessWidget {
           const SizedBox(height: 24),
           Row(
             children: [
-              Icon(Icons.security, color: AppColors.primaryFixedDim.withValues(alpha: 0.6), size: 14),
+              Icon(
+                Icons.security,
+                color: AppColors.primaryFixedDim.withValues(alpha: 0.6),
+                size: 14,
+              ),
               const SizedBox(width: 8),
               Text(
                 'DIGITAL ENCRYPTION VERIFIED // END OF LOG',
@@ -234,7 +239,10 @@ class CompletePage extends StatelessWidget {
               width: 250,
               height: 60,
               decoration: BoxDecoration(
-                border: Border.all(color: AppColors.primaryFixedDim.withValues(alpha: 0.4), width: 2),
+                border: Border.all(
+                  color: AppColors.primaryFixedDim.withValues(alpha: 0.4),
+                  width: 2,
+                ),
               ),
             ),
           ),

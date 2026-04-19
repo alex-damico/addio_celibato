@@ -64,9 +64,9 @@ class _TaskPageState extends State<TaskPage> {
     } catch (e, stackTrace) {
       log.severe("Errore durante l'invio del pegno", e, stackTrace);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Errore durante l'invio: $e")),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("Errore durante l'invio: $e")));
       }
     } finally {
       if (mounted) {
@@ -106,27 +106,35 @@ class _TaskPageState extends State<TaskPage> {
     return Scaffold(
       appBar: _buildAppBar(themeData),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator(color: AppColors.primary))
+          ? const Center(
+              child: CircularProgressIndicator(color: AppColors.primary),
+            )
           : _errorMessage != null
-              ? Center(child: Text(_errorMessage!, style: const TextStyle(color: Colors.red)))
-              : Column(
-                  children: [
-                    _buildHeader(themeData),
-                    Expanded(
-                      child: ListView.separated(
-                        padding: const EdgeInsets.all(24),
-                        itemCount: _tasks.length,
-                        separatorBuilder: (context, index) => const SizedBox(height: 12),
-                        itemBuilder: (context, index) {
-                          final task = _tasks[index];
-                          final isSelected = _selectedTask?.id == task.id;
-                          return _buildTaskItem(task, isSelected, themeData);
-                        },
-                      ),
-                    ),
-                    _buildBottomAction(themeData),
-                  ],
+          ? Center(
+              child: Text(
+                _errorMessage!,
+                style: const TextStyle(color: Colors.red),
+              ),
+            )
+          : Column(
+              children: [
+                _buildHeader(themeData),
+                Expanded(
+                  child: ListView.separated(
+                    padding: const EdgeInsets.all(24),
+                    itemCount: _tasks.length,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 12),
+                    itemBuilder: (context, index) {
+                      final task = _tasks[index];
+                      final isSelected = _selectedTask?.id == task.id;
+                      return _buildTaskItem(task, isSelected, themeData);
+                    },
+                  ),
                 ),
+                _buildBottomAction(themeData),
+              ],
+            ),
     );
   }
 
@@ -140,10 +148,7 @@ class _TaskPageState extends State<TaskPage> {
         children: [
           const Icon(Icons.description, color: AppColors.text),
           const SizedBox(width: 12),
-          Text(
-            'PEGNI DISPONIBILI',
-            style: themeData.textTheme.displayLarge,
-          ),
+          Text('PEGNI DISPONIBILI', style: themeData.textTheme.displayLarge),
         ],
       ),
     );
@@ -192,7 +197,9 @@ class _TaskPageState extends State<TaskPage> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primary.withValues(alpha: 0.1) : AppColors.surfaceContainer,
+          color: isSelected
+              ? AppColors.primary.withValues(alpha: 0.1)
+              : AppColors.surfaceContainer,
           border: Border.all(
             color: isSelected ? AppColors.primary : AppColors.outlineVariant,
             width: 2,
@@ -236,7 +243,9 @@ class _TaskPageState extends State<TaskPage> {
             backgroundColor: AppColors.primary,
             foregroundColor: AppColors.onPrimaryFixed,
             disabledBackgroundColor: AppColors.outlineVariant,
-            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero,
+            ),
             elevation: 0,
           ),
           child: _isSending

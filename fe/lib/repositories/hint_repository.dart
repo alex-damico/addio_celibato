@@ -11,5 +11,4 @@ class HintRepository {
 
   Future<void> setHintUnlocked(int hintId) =>
       restClient.setHintUnlocked(hintId.toString());
-
 }

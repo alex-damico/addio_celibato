@@ -7,9 +7,7 @@ part 'tasks.g.dart';
 class TasksDto {
   final List<TaskDto> content;
 
-  TasksDto({
-    required this.content,
-  });
+  TasksDto({required this.content});
 
   factory TasksDto.fromJson(Map<String, dynamic> json) =>
       _$TasksDtoFromJson(json);
