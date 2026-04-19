@@ -1,4 +1,4 @@
-package dev.alessandrodamico.fe;
+package dev.alessandrodamico.addiocelibato;
 
 import io.flutter.embedding.android.FlutterActivity;
 

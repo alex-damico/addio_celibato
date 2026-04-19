@@ -1,4 +1,4 @@
-import 'package:fe/models/task.dart';
+import 'package:addio_celibato/models/task.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'tasks.g.dart';

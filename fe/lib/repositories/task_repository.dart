@@ -1,5 +1,5 @@
-import 'package:fe/models/task.dart';
-import 'package:fe/models/task_create.dart';
+import 'package:addio_celibato/models/task.dart';
+import 'package:addio_celibato/models/task_create.dart';
 
 import '../models/tasks.dart';
 import '../network/rest_client.dart';

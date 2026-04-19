@@ -1,4 +1,4 @@
-import 'package:fe/pages/question_page.dart';
+import 'package:addio_celibato/pages/question_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logging/logging.dart';

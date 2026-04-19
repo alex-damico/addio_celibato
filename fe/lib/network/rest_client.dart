@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:fe/models/hint.dart';
-import 'package:fe/models/question.dart';
-import 'package:fe/models/task_create.dart';
-import 'package:fe/models/tasks.dart';
+import 'package:addio_celibato/models/hint.dart';
+import 'package:addio_celibato/models/question.dart';
+import 'package:addio_celibato/models/task_create.dart';
+import 'package:addio_celibato/models/tasks.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 

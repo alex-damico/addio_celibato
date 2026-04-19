@@ -1,4 +1,4 @@
-import 'package:fe/models/question.dart';
+import 'package:addio_celibato/models/question.dart';
 
 import '../network/rest_client.dart';
 

@@ -1,4 +1,4 @@
-import 'package:fe/app_colors.dart';
+import 'package:addio_celibato/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 

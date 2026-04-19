@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:fe/network/rest_client.dart';
-import 'package:fe/pages/home_page.dart';
-import 'package:fe/repositories/hint_repository.dart';
-import 'package:fe/repositories/question_repository.dart';
-import 'package:fe/repositories/task_repository.dart';
-import 'package:fe/service/admin_service.dart';
+import 'package:addio_celibato/network/rest_client.dart';
+import 'package:addio_celibato/pages/home_page.dart';
+import 'package:addio_celibato/repositories/hint_repository.dart';
+import 'package:addio_celibato/repositories/question_repository.dart';
+import 'package:addio_celibato/repositories/task_repository.dart';
+import 'package:addio_celibato/service/admin_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';

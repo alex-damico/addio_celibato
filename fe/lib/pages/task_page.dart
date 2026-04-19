@@ -1,7 +1,7 @@
-import 'package:fe/main.dart';
-import 'package:fe/models/task.dart';
-import 'package:fe/repositories/task_repository.dart';
-import 'package:fe/widgets/access_status_dialog.dart';
+import 'package:addio_celibato/main.dart';
+import 'package:addio_celibato/models/task.dart';
+import 'package:addio_celibato/repositories/task_repository.dart';
+import 'package:addio_celibato/widgets/access_status_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import '../app_colors.dart';
