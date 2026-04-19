@@ -16,7 +16,12 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 ## commands
+- Aggiornamento build_runner
 ```shell
 flutter pub run build_runner build
 ```
 
+- Aggiornamento icona
+```shell
+flutter pub run flutter_launcher_icons
+```

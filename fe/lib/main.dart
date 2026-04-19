@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Addio Celibato Ale',
+      title: 'Addio Celibato',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         brightness: Brightness.dark,
