@@ -4,6 +4,7 @@ import 'package:addio_celibato/repositories/task_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import '../app_colors.dart';
+import '../injection.dart';
 
 class CreateTaskPage extends StatefulWidget {
   const CreateTaskPage({super.key});

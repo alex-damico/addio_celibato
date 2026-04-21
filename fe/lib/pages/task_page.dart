@@ -5,6 +5,7 @@ import 'package:addio_celibato/widgets/access_status_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import '../app_colors.dart';
+import '../injection.dart';
 
 class TaskPage extends StatefulWidget {
   const TaskPage({super.key});

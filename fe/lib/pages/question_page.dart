@@ -12,6 +12,7 @@ import 'package:addio_celibato/service/admin_service.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import '../app_colors.dart';
+import '../injection.dart';
 
 class QuestionPage extends StatefulWidget {
   const QuestionPage({super.key});
