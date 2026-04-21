@@ -73,7 +73,12 @@ class _HomePageState extends State<HomePage> {
                   _secretCounter++;
                   if (_secretCounter == 5) {
                     _secretCounter = 0;
-                    _showAdminPasswordDialog(context);
+                    if (isAdmin) {
+                      getIt<AdminService>().toggleAdmin();
+                      _log.info("Modalità Admin Disattivata!");
+                    } else {
+                      _showAdminPasswordDialog(context);
+                    }
                   }
                 },
                 child: Text(
@@ -257,60 +262,64 @@ class _HomePageState extends State<HomePage> {
     final TextEditingController controller = TextEditingController();
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text(
-          'ACCESSO AUTORIZZATO',
-          style: TextStyle(
-            color: AppColors.primary,
-            fontWeight: FontWeight.bold,
+      barrierDismissible: false,
+      builder: (context) => PopScope(
+        canPop: false,
+        child: AlertDialog(
+          title: const Text(
+            'ACCESSO AUTORIZZATO',
+            style: TextStyle(
+              color: AppColors.primary,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        content: TextField(
-          controller: controller,
-          obscureText: true,
-          decoration: const InputDecoration(
-            labelText: 'PASSWORD DI SISTEMA',
-            border: OutlineInputBorder(),
+          content: TextField(
+            controller: controller,
+            obscureText: true,
+            decoration: const InputDecoration(
+              labelText: 'PASSWORD DI SISTEMA',
+              border: OutlineInputBorder(),
+            ),
+            style: TextStyle(
+              color: AppColors.primary,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          style: TextStyle(
-            color: AppColors.primary,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        actions: [
-          const SizedBox(width: 16),
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              'ANNULLA',
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: AppColors.outlineVariant,
+          actions: [
+            const SizedBox(width: 16),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                'ANNULLA',
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: AppColors.outlineVariant,
+                    ),
               ),
             ),
-          ),
-          const SizedBox(width: 16),
-          ElevatedButton(
-            onPressed: () {
-              if (controller.text == 'sposo2025') {
-                getIt<AdminService>().toggleAdmin();
-                _log.info("Modalità Admin Attivata!");
-                Navigator.pop(context);
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('ACCESSO NEGATO: Password Errata'),
-                  ),
-                );
-              }
-            },
-            child: Text(
-              'LOG IN',
-              style: Theme.of(
-                context,
-              ).textTheme.labelMedium?.copyWith(color: AppColors.background),
+            const SizedBox(width: 16),
+            ElevatedButton(
+              onPressed: () {
+                if (controller.text == 'sposo2025') {
+                  getIt<AdminService>().toggleAdmin();
+                  _log.info("Modalità Admin Attivata!");
+                  Navigator.pop(context);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('ACCESSO NEGATO: Password Errata'),
+                    ),
+                  );
+                }
+              },
+              child: Text(
+                'LOG IN',
+                style: Theme.of(
+                  context,
+                ).textTheme.labelMedium?.copyWith(color: AppColors.background),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
