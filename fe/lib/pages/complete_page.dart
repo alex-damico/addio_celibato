@@ -189,7 +189,7 @@ class CompletePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Ottimo lavoro agenti. Avete superato ogni sfida e protetto l'obiettivo. Lo sposo è libero (per ora...). La missione sotterranea si conclude qui, ma la leggenda del vostro team rimarrà negli archivi.",
+            "Ottimo lavoro sposo. Hai superato ogni sfida. La missione si conclude qui. 🍻",
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,
