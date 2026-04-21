@@ -11,24 +11,40 @@ import 'package:get_it/get_it.dart';
 
 import 'package:logging/logging.dart';
 
-import 'app_colors.dart';
+import 'app_theme.dart';
 
 GetIt getIt = GetIt.instance;
 
 void setupLocator() {
-  final dio = Dio();
+  const String envBaseUrl = String.fromEnvironment('BASE_URL');
+  String baseUrl;
 
-  String baseUrl = '/api';
-  if (kDebugMode) {
-    if (kIsWeb) {
-      baseUrl = 'http://localhost:8080/api';
-    } else {
-      //baseUrl = 'http://10.0.2.2:8080/api';
-      baseUrl = 'http://192.168.178.114:8080/api';
-    }
+  if (envBaseUrl.isNotEmpty) {
+    baseUrl = envBaseUrl;
+  } else {
+    baseUrl = '/api';
   }
 
-  final restClient = RestClient(dio, baseUrl: baseUrl);
+  final dio = Dio(
+    BaseOptions(
+      baseUrl: baseUrl,
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 15),
+      contentType: 'application/json',
+    ),
+  );
+
+  if (kDebugMode) {
+    dio.interceptors.add(LogInterceptor(
+      requestHeader: true,
+      requestBody: true,
+      responseHeader: false,
+      responseBody: true,
+      error: true,
+    ));
+  }
+
+  final restClient = RestClient(dio);
 
   getIt.registerLazySingleton<QuestionRepository>(
     () => QuestionRepository(restClient: restClient),
@@ -63,66 +79,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Addio Celibato',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: AppColors.background,
-
-        colorScheme: const ColorScheme.dark(
-          primary: AppColors.primary,
-          onPrimary: AppColors.onPrimaryFixed,
-          primaryContainer: AppColors.primaryContainer,
-          secondary: AppColors.secondary,
-          surface: AppColors.background,
-        ),
-
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primaryContainer,
-            foregroundColor: AppColors.onPrimaryFixed,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.zero,
-            ),
-          ),
-        ),
-
-        textTheme: TextTheme(
-          displayLarge: TextStyle(
-            color: AppColors.text,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            letterSpacing: 2,
-          ),
-
-          labelSmall: TextStyle(
-            color: AppColors.text,
-            fontSize: 10,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 2,
-          ),
-
-          labelMedium: TextStyle(
-            color: AppColors.text,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 2,
-          ),
-
-          labelLarge: TextStyle(
-            color: AppColors.text,
-            fontSize: 56,
-            height: 0.9,
-            fontWeight: FontWeight.w900,
-            letterSpacing: -2,
-          ),
-
-          bodyMedium: TextStyle(
-            color: AppColors.text,
-            fontSize: 20,
-            height: 1.5,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
+      theme: AppTheme.darkTheme,
       home: HomePage(),
     );
   }

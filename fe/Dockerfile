@@ -11,7 +11,8 @@ RUN flutter config --enable-web
 RUN flutter pub get
 
 # Build web (release)
-RUN flutter build web --release
+ARG BASE_URL=/api
+RUN flutter build web --release --dart-define=BASE_URL=$BASE_URL
 
 
 FROM nginx:alpine

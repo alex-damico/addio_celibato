@@ -25,3 +25,13 @@ flutter pub run build_runner build
 ```shell
 flutter pub run flutter_launcher_icons
 ```
+
+- Avvio applicazione su Android Studio
+  - Configurazione Mobile
+    ```
+    Additional run args  --dart-define=BASE_URL=http://192.168.178.114:8080/api
+    ```
+  - Configurazione WebApp
+    ```
+    Additional run args  --web-port=55255 --dart-define="BASE_URL=http://localhost:8080/api"
+    ```
