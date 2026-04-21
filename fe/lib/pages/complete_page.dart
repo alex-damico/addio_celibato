@@ -1,11 +1,10 @@
 import 'package:addio_celibato/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:logging/logging.dart';
+
 
 class CompletePage extends StatelessWidget {
-  final log = Logger('CompletePage');
 
-  CompletePage({super.key});
+  const CompletePage({super.key});
 
   @override
   Widget build(BuildContext context) {

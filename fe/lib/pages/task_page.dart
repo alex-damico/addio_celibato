@@ -1,11 +1,10 @@
-import 'package:addio_celibato/main.dart';
 import 'package:addio_celibato/models/task.dart';
 import 'package:addio_celibato/repositories/task_repository.dart';
 import 'package:addio_celibato/widgets/access_status_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:logging/logging.dart';
 import '../app_colors.dart';
 import '../injection.dart';
+import '../utils/logger.dart';
 
 class TaskPage extends StatefulWidget {
   const TaskPage({super.key});
@@ -15,7 +14,7 @@ class TaskPage extends StatefulWidget {
 }
 
 class _TaskPageState extends State<TaskPage> {
-  final log = Logger('TaskPage');
+  final _log = AppLogger.get('TaskPage');
 
   List<TaskDto> _tasks = [];
   TaskDto? _selectedTask;
@@ -42,7 +41,7 @@ class _TaskPageState extends State<TaskPage> {
         _isLoading = false;
       });
     } catch (e, stackTrace) {
-      log.severe("Errore durante il caricamento dei pegni", e, stackTrace);
+      _log.severe("Errore durante il caricamento dei pegni", e, stackTrace);
       setState(() {
         _errorMessage = "Errore durante il caricamento dei pegni: $e";
         _isLoading = false;
@@ -63,7 +62,7 @@ class _TaskPageState extends State<TaskPage> {
         _showSuccessDialog();
       }
     } catch (e, stackTrace) {
-      log.severe("Errore durante l'invio del pegno", e, stackTrace);
+      _log.severe("Errore durante l'invio del pegno", e, stackTrace);
       if (mounted) {
         ScaffoldMessenger.of(
           context,

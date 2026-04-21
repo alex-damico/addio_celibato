@@ -1,10 +1,9 @@
-import 'package:addio_celibato/main.dart';
 import 'package:addio_celibato/models/task_create.dart';
 import 'package:addio_celibato/repositories/task_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:logging/logging.dart';
 import '../app_colors.dart';
 import '../injection.dart';
+import '../utils/logger.dart';
 
 class CreateTaskPage extends StatefulWidget {
   const CreateTaskPage({super.key});
@@ -14,7 +13,8 @@ class CreateTaskPage extends StatefulWidget {
 }
 
 class _CreateTaskPageState extends State<CreateTaskPage> {
-  final log = Logger('CreateTaskPage');
+  final _log = AppLogger.get('CreateTaskPage');
+
   final TextEditingController _contentController = TextEditingController();
   bool _isSaving = false;
 
@@ -35,7 +35,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
     try {
       final create = TaskCreateDto(content: content);
       await getIt<TaskRepository>().save(create);
-      log.info("Pegno creato con successo: $content");
+      _log.info("Pegno creato con successo: $content");
       if (mounted) {
         Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(
@@ -43,7 +43,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
         );
       }
     } catch (e, stackTrace) {
-      log.severe("Errore durante il salvataggio del pegno", e, stackTrace);
+      _log.severe("Errore durante il salvataggio del pegno", e, stackTrace);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Errore durante il salvataggio: $e')),

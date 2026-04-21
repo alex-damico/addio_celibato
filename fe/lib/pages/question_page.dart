@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:addio_celibato/main.dart';
 import 'package:addio_celibato/models/question.dart';
 import 'package:addio_celibato/pages/complete_page.dart';
 import 'package:addio_celibato/pages/create_task_page.dart';
@@ -10,9 +9,9 @@ import 'package:addio_celibato/widgets/access_status_dialog.dart';
 import 'package:addio_celibato/widgets/hint_dialog.dart';
 import 'package:addio_celibato/service/admin_service.dart';
 import 'package:flutter/material.dart';
-import 'package:logging/logging.dart';
 import '../app_colors.dart';
 import '../injection.dart';
+import '../utils/logger.dart';
 
 class QuestionPage extends StatefulWidget {
   const QuestionPage({super.key});
@@ -22,7 +21,7 @@ class QuestionPage extends StatefulWidget {
 }
 
 class _QuestionPageState extends State<QuestionPage> {
-  final log = Logger('QuestionPage');
+  final _log = AppLogger.get('QuestionPage');
 
   QuestionDto? _question;
   bool _isLoading = true;
@@ -67,7 +66,7 @@ class _QuestionPageState extends State<QuestionPage> {
         });
       }
     } catch (e, stackTrace) {
-      log.severe("Errore durante il caricamento della domanda", e, stackTrace);
+      _log.severe("Errore durante il caricamento della domanda", e, stackTrace);
       setState(() {
         _errorMessage = "Errore inatteso: $e";
         _isLoading = false;
@@ -88,7 +87,7 @@ class _QuestionPageState extends State<QuestionPage> {
           _showAccessGrantedDialog();
         }
       } catch (e, stackTrace) {
-        log.severe(
+        _log.severe(
           "Errore durante il salvataggio della risposta",
           e,
           stackTrace,
@@ -184,7 +183,7 @@ class _QuestionPageState extends State<QuestionPage> {
         ).showSnackBar(SnackBar(content: Text(message)));
       }
     } catch (e, stackTrace) {
-      log.severe("Errore durante il recupero dell'aiuto", e, stackTrace);
+      _log.severe("Errore durante il recupero dell'aiuto", e, stackTrace);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Impossibile recuperare l'aiuto: $e")),
