@@ -1,12 +1,10 @@
 import 'package:addio_celibato/pages/question_page.dart';
+import 'package:addio_celibato/utils/logger.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:logging/logging.dart';
 
 import '../app_colors.dart';
+import '../injection.dart';
 import '../service/admin_service.dart';
-
-GetIt getIt = GetIt.instance;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final log = Logger('HomePage');
+  final _log = AppLogger.get('HomePage');
   int _secretCounter = 0;
 
   @override
@@ -74,9 +72,8 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {
                   _secretCounter++;
                   if (_secretCounter == 5) {
-                    getIt<AdminService>().toggleAdmin();
                     _secretCounter = 0;
-                    log.info("Modalità Admin Attivata!");
+                    _showAdminPasswordDialog(context);
                   }
                 },
                 child: Text(
@@ -250,6 +247,68 @@ class _HomePageState extends State<HomePage> {
           Text(
             'GRID: 45.4642° N, 9.1900° E',
             style: TextStyle(fontSize: 9, letterSpacing: 2),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showAdminPasswordDialog(BuildContext context) {
+    final TextEditingController controller = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text(
+          'ACCESSO AUTORIZZATO',
+          style: TextStyle(
+            color: AppColors.primary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        content: TextField(
+          controller: controller,
+          obscureText: true,
+          decoration: const InputDecoration(
+            labelText: 'PASSWORD DI SISTEMA',
+            border: OutlineInputBorder(),
+          ),
+          style: TextStyle(
+            color: AppColors.primary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          const SizedBox(width: 16),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              'ANNULLA',
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                color: AppColors.outlineVariant,
+              ),
+            ),
+          ),
+          const SizedBox(width: 16),
+          ElevatedButton(
+            onPressed: () {
+              if (controller.text == 'sposo2025') {
+                getIt<AdminService>().toggleAdmin();
+                _log.info("Modalità Admin Attivata!");
+                Navigator.pop(context);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('ACCESSO NEGATO: Password Errata'),
+                  ),
+                );
+              }
+            },
+            child: Text(
+              'LOG IN',
+              style: Theme.of(
+                context,
+              ).textTheme.labelMedium?.copyWith(color: AppColors.background),
+            ),
           ),
         ],
       ),
