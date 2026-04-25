@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:addio_celibato/models/hint.dart';
 import 'package:addio_celibato/models/question.dart';
+import 'package:addio_celibato/models/questions.dart';
 import 'package:addio_celibato/models/task_create.dart';
 import 'package:addio_celibato/models/tasks.dart';
 import 'package:retrofit/error_logger.dart';
@@ -15,10 +16,16 @@ abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
   @GET('/questions/firstPosition')
-  Future<QuestionDto> getFirstPosition();
+  Future<QuestionDto> getQuestionByFirstPosition();
+
+  @GET('/questions/?page=0&size=50&sort=id')
+  Future<QuestionsDto> getAllQuestions();
 
   @PATCH('/questions/{id}/isResolved')
   Future<void> setResolved(@Path() String id);
+
+  @PATCH('/questions/{id}/resetIsResolved')
+  Future<void> resetResolved(@Path() String id);
 
   @GET('/hints/{questionId}/firstPosition')
   Future<HintDto> getFirstHintByQuestionId(@Path() int questionId);

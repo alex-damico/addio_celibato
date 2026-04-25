@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:addio_celibato/models/question.dart';
 import 'package:addio_celibato/pages/complete_page.dart';
+import 'package:addio_celibato/pages/questions_page.dart';
 import 'package:addio_celibato/pages/task_page.dart';
 import 'package:addio_celibato/repositories/hint_repository.dart';
 import 'package:addio_celibato/repositories/question_repository.dart';
@@ -518,6 +519,11 @@ class _QuestionPageState extends State<QuestionPage> {
       ),
       child: Row(
         children: [
+          _buildNavItem(Icons.format_list_numbered, 'TAPPE', false, themeData, () {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (context) => const QuestionsPage()));
+          }),
           _buildNavItem(Icons.description, 'PEGNI', false, themeData, () {
             Navigator.of(
               context,

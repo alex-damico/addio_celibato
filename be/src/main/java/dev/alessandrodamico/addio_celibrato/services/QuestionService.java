@@ -35,6 +35,13 @@ public class QuestionService {
         return QuestionDto.toDto(repository.save(entity));
     }
 
+    public QuestionDto updateResetIsRevolved(Long id) {
+        Question entity = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Domanda non trovata"));
+        entity.setIsResolved(false);
+        return QuestionDto.toDto(repository.save(entity));
+    }
+
     public QuestionDto findFirstPosition() {
         return this.repository.findFirstByIsResolvedIsFalseOrderByPositionAsc().map(QuestionDto::toDto)
                 .orElseThrow(EntityNotFoundException::new);

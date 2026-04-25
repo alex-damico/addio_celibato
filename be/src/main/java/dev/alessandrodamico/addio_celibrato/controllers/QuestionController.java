@@ -58,6 +58,18 @@ public class QuestionController {
         return ResponseEntity.ok(this.service.updateIsRevolved(id));
     }
 
+    @PatchMapping("/{id}/resetIsResolved")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", content = @Content),
+            @ApiResponse(responseCode = "400", content = @Content),
+            @ApiResponse(responseCode = "404", content = @Content),
+            @ApiResponse(responseCode = "409", content = @Content)
+    })
+    public ResponseEntity<QuestionDto> updateResetIsRevolved(
+            @PathVariable Long id) {
+        return ResponseEntity.ok(this.service.updateResetIsRevolved(id));
+    }
+
     @GetMapping("/")
     @ApiResponses(value = {
             @ApiResponse(
