@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:addio_celibato/models/question.dart';
 import 'package:addio_celibato/pages/complete_page.dart';
-import 'package:addio_celibato/pages/create_task_page.dart';
 import 'package:addio_celibato/pages/task_page.dart';
 import 'package:addio_celibato/repositories/hint_repository.dart';
 import 'package:addio_celibato/repositories/question_repository.dart';
@@ -524,17 +523,6 @@ class _QuestionPageState extends State<QuestionPage> {
               context,
             ).push(MaterialPageRoute(builder: (context) => const TaskPage()));
           }),
-          _buildNavItem(
-            Icons.add_circle_outline,
-            'CREA PEGNO',
-            false,
-            themeData,
-            () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const CreateTaskPage()),
-              );
-            },
-          ),
         ],
       ),
     );

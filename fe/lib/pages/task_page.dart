@@ -1,4 +1,5 @@
 import 'package:addio_celibato/models/task.dart';
+import 'package:addio_celibato/pages/create_task_page.dart';
 import 'package:addio_celibato/repositories/task_repository.dart';
 import 'package:addio_celibato/widgets/access_status_dialog.dart';
 import 'package:flutter/material.dart';
@@ -151,6 +152,18 @@ class _TaskPageState extends State<TaskPage> {
           Text('PEGNI DISPONIBILI', style: themeData.textTheme.displayLarge),
         ],
       ),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.add_circle_outline, color: AppColors.primary),
+          onPressed: () async {
+            await Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const CreateTaskPage()),
+            );
+            _loadTasks();
+          },
+        ),
+        const SizedBox(width: 8),
+      ],
     );
   }
 
