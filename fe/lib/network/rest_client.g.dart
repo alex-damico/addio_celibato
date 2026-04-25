@@ -114,6 +114,34 @@ class _RestClient implements RestClient {
   }
 
   @override
+  Future<int> saveQuestion(QuestionCreateDto question) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(question.toJson());
+    final _options = _setStreamType<int>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/questions/',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<int>(_options);
+    late int _value;
+    try {
+      _value = _result.data!;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<HintDto> getFirstHintByQuestionId(int questionId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

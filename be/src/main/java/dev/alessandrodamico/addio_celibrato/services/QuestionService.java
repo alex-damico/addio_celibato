@@ -21,11 +21,12 @@ public class QuestionService {
 
     public Long add(CreateQuestionDto createQuestionDto) {
         Question question = CreateQuestionDto.fromDto(createQuestionDto);
-        if (!this.repository.existsByPosition(question.getPosition())) {
-            return this.repository.save(question).getId();
-        } else {
-            throw new EntityExistsException("La posizione " + question.getPosition() + " è già assegnata.");
-        }
+        Integer nextPosition = repository.findFirstByOrderByPositionDesc()
+                .map(lastQuestion -> lastQuestion.getPosition() + 1)
+                .orElse(1);
+        
+        question.setPosition(nextPosition);
+        return this.repository.save(question).getId();
     }
 
     public QuestionDto updateIsRevolved(Long id) {

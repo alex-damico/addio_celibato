@@ -268,6 +268,13 @@ class _QuestionPageState extends State<QuestionPage> {
           Text('MISSION: ESCAPE', style: themeData.textTheme.displayLarge),
         ],
       ),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.refresh, color: AppColors.primary),
+          onPressed: _loadQuestion,
+        ),
+        const SizedBox(width: 8),
+      ],
     );
   }
 

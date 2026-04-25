@@ -1,3 +1,4 @@
+import 'package:addio_celibato/models/question_create.dart';
 import 'package:addio_celibato/models/question.dart';
 import 'package:addio_celibato/models/questions.dart';
 
@@ -15,4 +16,6 @@ class QuestionRepository {
   Future<void> setResolved(int id) => restClient.setResolved(id.toString());
 
   Future<void> resetResolved(int id) => restClient.resetResolved(id.toString());
+
+  Future<int> save(QuestionCreateDto question) => restClient.saveQuestion(question);
 }

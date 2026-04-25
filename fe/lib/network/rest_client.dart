@@ -1,3 +1,4 @@
+import 'package:addio_celibato/models/question_create.dart';
 import 'package:dio/dio.dart';
 import 'package:addio_celibato/models/hint.dart';
 import 'package:addio_celibato/models/question.dart';
@@ -26,6 +27,9 @@ abstract class RestClient {
 
   @PATCH('/questions/{id}/resetIsResolved')
   Future<void> resetResolved(@Path() String id);
+
+  @POST('/questions/')
+  Future<int> saveQuestion(@Body() QuestionCreateDto question);
 
   @GET('/hints/{questionId}/firstPosition')
   Future<HintDto> getFirstHintByQuestionId(@Path() int questionId);
