@@ -1,8 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:addio_celibato/models/question.dart';
-import 'package:addio_celibato/pages/complete_page.dart';
-import 'package:addio_celibato/pages/questions_page.dart';
-import 'package:addio_celibato/pages/task_page.dart';
 import 'package:addio_celibato/repositories/hint_repository.dart';
 import 'package:addio_celibato/repositories/question_repository.dart';
 import 'package:addio_celibato/widgets/access_status_dialog.dart';
@@ -55,9 +52,7 @@ class _QuestionPageState extends State<QuestionPage> {
     } on DioException catch (e) {
       if (e.response?.statusCode == 404) {
         if (mounted) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => CompletePage()),
-          );
+          Navigator.of(context).pushReplacementNamed('/complete');
         }
       } else {
         setState(() {
@@ -122,9 +117,7 @@ class _QuestionPageState extends State<QuestionPage> {
         onButtonPressed: () {
           Navigator.of(context).pop();
           if (isLast) {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => CompletePage()),
-            );
+            Navigator.of(context).pushReplacementNamed('/complete');
           } else {
             _answerController.clear();
             _loadQuestion();
@@ -527,14 +520,10 @@ class _QuestionPageState extends State<QuestionPage> {
       child: Row(
         children: [
           _buildNavItem(Icons.format_list_numbered, 'TAPPE', false, themeData, () {
-            Navigator.of(
-              context,
-            ).push(MaterialPageRoute(builder: (context) => const QuestionsPage()));
+            Navigator.of(context).pushNamed('/admin/questions');
           }),
           _buildNavItem(Icons.description, 'PEGNI', false, themeData, () {
-            Navigator.of(
-              context,
-            ).push(MaterialPageRoute(builder: (context) => const TaskPage()));
+            Navigator.of(context).pushNamed('/admin/tasks');
           }),
         ],
       ),

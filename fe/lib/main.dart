@@ -1,5 +1,11 @@
 import 'package:addio_celibato/injection.dart';
 import 'package:addio_celibato/pages/home_page.dart';
+import 'package:addio_celibato/pages/question_page.dart';
+import 'package:addio_celibato/pages/complete_page.dart';
+import 'package:addio_celibato/pages/questions_page.dart';
+import 'package:addio_celibato/pages/task_page.dart';
+import 'package:addio_celibato/pages/create_question_page.dart';
+import 'package:addio_celibato/pages/create_task_page.dart';
 import 'package:addio_celibato/utils/logger.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +29,16 @@ class MyApp extends StatelessWidget {
       title: 'Addio Celibato',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
-      home: const HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        '/question': (context) => const QuestionPage(),
+        '/complete': (context) => const CompletePage(),
+        '/admin/questions': (context) => const QuestionsPage(),
+        '/admin/tasks': (context) => const TaskPage(),
+        '/admin/questions/create': (context) => const CreateQuestionPage(),
+        '/admin/tasks/create': (context) => const CreateTaskPage(),
+      },
     );
   }
 }

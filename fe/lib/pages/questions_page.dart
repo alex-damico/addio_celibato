@@ -1,5 +1,4 @@
 import 'package:addio_celibato/models/question.dart';
-import 'package:addio_celibato/pages/create_question_page.dart';
 import 'package:addio_celibato/repositories/question_repository.dart';
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
@@ -138,9 +137,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
         IconButton(
           icon: const Icon(Icons.add_circle_outline, color: AppColors.primary),
           onPressed: () async {
-            await Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const CreateQuestionPage()),
-            );
+            await Navigator.of(context).pushNamed('/admin/questions/create');
             _loadQuestions();
           },
         ),

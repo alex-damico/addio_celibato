@@ -1,5 +1,4 @@
 import 'package:addio_celibato/models/task.dart';
-import 'package:addio_celibato/pages/create_task_page.dart';
 import 'package:addio_celibato/repositories/task_repository.dart';
 import 'package:addio_celibato/widgets/access_status_dialog.dart';
 import 'package:flutter/material.dart';
@@ -156,9 +155,7 @@ class _TaskPageState extends State<TaskPage> {
         IconButton(
           icon: const Icon(Icons.add_circle_outline, color: AppColors.primary),
           onPressed: () async {
-            await Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const CreateTaskPage()),
-            );
+            await Navigator.of(context).pushNamed('/admin/tasks/create');
             _loadTasks();
           },
         ),

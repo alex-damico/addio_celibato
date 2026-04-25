@@ -1,4 +1,3 @@
-import 'package:addio_celibato/pages/question_page.dart';
 import 'package:addio_celibato/utils/logger.dart';
 import 'package:flutter/material.dart';
 
@@ -207,9 +206,7 @@ class _HomePageState extends State<HomePage> {
             height: 70,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const QuestionPage()),
-                );
+                Navigator.of(context).pushNamed('/question');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: themaData.colorScheme.primaryContainer,
