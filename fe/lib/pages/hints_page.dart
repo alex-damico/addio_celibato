@@ -224,7 +224,7 @@ class _HintsPageState extends State<HintsPage> {
         child: Row(
           children: [
             Icon(
-              hint.isUnlocked ? Icons.lock_open : Icons.lock,
+              hint.isUnlocked ? Icons.lock : Icons.lock_open,
               color: hint.isUnlocked
                   ? AppColors.tertiary
                   : (isSelected ? AppColors.primary : AppColors.outline),

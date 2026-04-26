@@ -130,7 +130,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
         children: [
           const Icon(Icons.help_outline, color: AppColors.text),
           const SizedBox(width: 12),
-          Text('DOMANDE DISPONIBILI', style: themeData.textTheme.displayLarge),
+          Text('DOMANDE', style: themeData.textTheme.displayLarge),
         ],
       ),
       actions: [
