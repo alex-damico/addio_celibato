@@ -8,6 +8,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,7 +55,35 @@ public class HintController {
     })
     public ResponseEntity<HintDto> updateIsUnlocked(
             @PathVariable Long id) {
-        return ResponseEntity.ok(this.service.updateIsUnlocked(id));
+        return ResponseEntity.ok(this.service.updateIsUnlocked(id, true));
+    }
+
+    @PatchMapping("/{id}/resetIsUnlocked")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", content = @Content),
+            @ApiResponse(responseCode = "400", content = @Content),
+            @ApiResponse(responseCode = "404", content = @Content),
+            @ApiResponse(responseCode = "409", content = @Content)
+    })
+    public ResponseEntity<HintDto> updateResetIsUnlocked(
+            @PathVariable Long id) {
+        return ResponseEntity.ok(this.service.updateIsUnlocked(id, false));
+    }
+
+    @GetMapping("/{questionId}/")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = Page.class)
+                    )
+            ),
+            @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Risorsa non trovata", content = @Content)
+    })
+    public ResponseEntity<Page<HintDto>> getAll(@PathVariable Long questionId, @ParameterObject Pageable pageable) {
+        return ResponseEntity.ok(this.service.findAll(questionId, pageable));
     }
 
 }

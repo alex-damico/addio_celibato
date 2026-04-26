@@ -265,46 +265,86 @@ class _QuestionsPageState extends State<QuestionsPage> {
         color: AppColors.surfaceContainer,
         border: Border(top: BorderSide(color: Colors.white10)),
       ),
-      child: SizedBox(
-        width: double.infinity,
-        height: 70,
-        child: ElevatedButton(
-          onPressed: (isSelected && !_isResolving) ? _toggleQuestionStatus : null,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: _selectedQuestion?.isResolved == true
-                ? AppColors.secondary
-                : AppColors.primary,
-            foregroundColor: AppColors.onPrimaryFixed,
-            disabledBackgroundColor: AppColors.outlineVariant,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.zero,
-            ),
-            elevation: 0,
-          ),
-          child: _isResolving
-              ? const CircularProgressIndicator(color: AppColors.onPrimaryFixed)
-              : Row(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (isSelected) ...[
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: OutlinedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    '/admin/hints',
+                    arguments: _selectedQuestion,
+                  );
+                },
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: AppColors.primary, width: 2),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  ),
+                ),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      _selectedQuestion?.isResolved == true
-                          ? 'RESETTA STATO'
-                          : 'RISOLVI DOMANDA',
+                      'GESTISCI SUGGERIMENTI',
                       style: themeData.textTheme.bodyMedium?.copyWith(
-                        color: AppColors.onPrimaryFixed,
-                        fontWeight: FontWeight.w900,
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(width: 12),
-                    Icon(
-                      _selectedQuestion?.isResolved == true
-                          ? Icons.undo
-                          : Icons.check,
-                      size: 20,
-                    ),
+                    const Icon(Icons.lightbulb_outline, size: 20, color: AppColors.primary),
                   ],
                 ),
-        ),
+              ),
+            ),
+            const SizedBox(height: 12),
+          ],
+          SizedBox(
+            width: double.infinity,
+            height: 70,
+            child: ElevatedButton(
+              onPressed: (isSelected && !_isResolving) ? _toggleQuestionStatus : null,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: _selectedQuestion?.isResolved == true
+                    ? AppColors.secondary
+                    : AppColors.primary,
+                foregroundColor: AppColors.onPrimaryFixed,
+                disabledBackgroundColor: AppColors.outlineVariant,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero,
+                ),
+                elevation: 0,
+              ),
+              child: _isResolving
+                  ? const CircularProgressIndicator(color: AppColors.onPrimaryFixed)
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          _selectedQuestion?.isResolved == true
+                              ? 'RESETTA STATO'
+                              : 'RISOLVI DOMANDA',
+                          style: themeData.textTheme.bodyMedium?.copyWith(
+                            color: AppColors.onPrimaryFixed,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Icon(
+                          _selectedQuestion?.isResolved == true
+                              ? Icons.undo
+                              : Icons.check,
+                          size: 20,
+                        ),
+                      ],
+                    ),
+            ),
+          ),
+        ],
       ),
     );
   }

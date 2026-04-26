@@ -29,17 +29,10 @@ public class QuestionService {
         return this.repository.save(question).getId();
     }
 
-    public QuestionDto updateIsRevolved(Long id) {
+    public QuestionDto updateIsRevolved(Long id, Boolean isResolved) {
         Question entity = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Domanda non trovata"));
-        entity.setIsResolved(true);
-        return QuestionDto.toDto(repository.save(entity));
-    }
-
-    public QuestionDto updateResetIsRevolved(Long id) {
-        Question entity = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Domanda non trovata"));
-        entity.setIsResolved(false);
+        entity.setIsResolved(isResolved);
         return QuestionDto.toDto(repository.save(entity));
     }
 

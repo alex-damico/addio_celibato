@@ -55,7 +55,7 @@ public class QuestionController {
     })
     public ResponseEntity<QuestionDto> updateIsRevolved(
             @PathVariable Long id) {
-        return ResponseEntity.ok(this.service.updateIsRevolved(id));
+        return ResponseEntity.ok(this.service.updateIsRevolved(id, true));
     }
 
     @PatchMapping("/{id}/resetIsResolved")
@@ -67,7 +67,7 @@ public class QuestionController {
     })
     public ResponseEntity<QuestionDto> updateResetIsRevolved(
             @PathVariable Long id) {
-        return ResponseEntity.ok(this.service.updateResetIsRevolved(id));
+        return ResponseEntity.ok(this.service.updateIsRevolved(id, false));
     }
 
     @GetMapping("/")

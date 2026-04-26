@@ -3,6 +3,8 @@ import 'package:addio_celibato/pages/home_page.dart';
 import 'package:addio_celibato/pages/question_page.dart';
 import 'package:addio_celibato/pages/complete_page.dart';
 import 'package:addio_celibato/pages/questions_page.dart';
+import 'package:addio_celibato/pages/hints_page.dart';
+import 'package:addio_celibato/pages/create_hint_page.dart';
 import 'package:addio_celibato/pages/task_page.dart';
 import 'package:addio_celibato/pages/create_question_page.dart';
 import 'package:addio_celibato/pages/create_task_page.dart';
@@ -35,8 +37,10 @@ class MyApp extends StatelessWidget {
         '/question': (context) => const QuestionPage(),
         '/complete': (context) => const CompletePage(),
         '/admin/questions': (context) => const QuestionsPage(),
+        '/admin/hints': (context) => const HintsPage(),
         '/admin/tasks': (context) => const TaskPage(),
         '/admin/questions/create': (context) => const CreateQuestionPage(),
+        '/admin/hints/create': (context) => const CreateHintPage(),
         '/admin/tasks/create': (context) => const CreateTaskPage(),
       },
     );

@@ -1,3 +1,5 @@
+import 'package:addio_celibato/models/hint_create.dart';
+import 'package:addio_celibato/models/hints.dart';
 import 'package:addio_celibato/models/question_create.dart';
 import 'package:dio/dio.dart';
 import 'package:addio_celibato/models/hint.dart';
@@ -36,6 +38,15 @@ abstract class RestClient {
 
   @PATCH('/hints/{id}/isUnlocked')
   Future<void> setHintUnlocked(@Path() String id);
+
+  @GET('/hints/{questionId}/?page=0&size=20&sort=id')
+  Future<HintsDto> getAllHintsForQuestion(@Path() int questionId);
+
+  @PATCH('/hints/{id}/resetIsUnlocked')
+  Future<void> resetHintUnlocked(@Path() String id);
+
+  @POST('/hints/')
+  Future<int> saveHint(@Body() HintCreateDto hint);
 
   @GET('/tasks/?page=0&size=50')
   Future<TasksDto> getAllTasks();
