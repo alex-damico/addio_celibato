@@ -35,3 +35,8 @@ flutter pub run flutter_launcher_icons
     ```
     Additional run args  --web-port=55255 --dart-define="BASE_URL=http://localhost:8080/api"
     ```
+
+- APK per Android
+```shell
+flutter build apk --release --dart-define=BASE_URL=http://192.168.178.114:8080/api
+```
