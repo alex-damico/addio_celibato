@@ -6,7 +6,7 @@ public record CreateHintDto
         (String content, Long questionId)
 {
     public static Hint fromDto(CreateHintDto dto) {
-        return new Hint(null, null, dto.content(), false,
+        return new Hint(null, null, dto.content(), true,
                 dto.questionId());
     }
 }
