@@ -1,10 +1,6 @@
 name: Build and Publish Backend
 
 on:
-  push:
-    branches: [ "main" ]
-    paths:
-      - 'be/**'
   workflow_dispatch:
 
 env:
@@ -46,14 +42,14 @@ jobs:
             type=raw,value=latest
             type=sha,format=short
 
-      - name: Delete old image versions
-        uses: actions/delete-package-versions@v5
-        with:
-          package-name: ${{ env.IMAGE_NAME }}
-          package-type: 'container'
-          min-versions-to-keep: 1
-          delete-only-untagged-versions: 'false'
-          token: ${{ secrets.DELETE_PACKAGES_TOKEN }}
+      # - name: Delete old image versions
+      #   uses: actions/delete-package-versions@v5
+      #   with:
+      #     package-name: ${{ env.IMAGE_NAME }}
+      #     package-type: 'container'
+      #     min-versions-to-keep: 0
+      #     delete-only-untagged-versions: 'false'
+      #     token: ${{ secrets.DELETE_PACKAGES_TOKEN }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
