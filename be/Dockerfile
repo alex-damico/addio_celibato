@@ -2,16 +2,22 @@
 FROM eclipse-temurin:21-jdk-alpine AS build
 WORKDIR /app
 
-# Necessario per jlink --strip-debug
 RUN apk add --no-cache binutils
 
+# ✅ Layer 1: Copia solo i file di configurazione Maven
 COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
-RUN chmod +x mvnw && ./mvnw dependency:go-offline
+RUN chmod +x mvnw
 
+# ✅ Layer 2: Scarica dipendenze (rimane in cache se pom.xml non cambia)
+RUN ./mvnw dependency:go-offline -B -q
+
+# ✅ Layer 3: Copia il codice sorgente (invalida solo se src/ cambia)
 COPY src src
-RUN ./mvnw clean package -DskipTests
+
+# ✅ Layer 4: Build
+RUN ./mvnw clean package -DskipTests -q
 
 ## Stage 2: Creazione JRE personalizzato (con tanto spazio)
 #FROM eclipse-temurin:21-jre
@@ -23,7 +29,7 @@ RUN ./mvnw clean package -DskipTests
 #
 #ENTRYPOINT ["java","-jar","app.jar"]
 
-# Stage 2: Creazione JRE personalizzato
+# Stage 2: JRE personalizzato
 RUN jlink \
     --add-modules java.base,java.logging,java.naming,java.desktop,java.management,java.security.jgss,java.instrument,java.sql,java.xml,jdk.unsupported,java.sql.rowset,java.net.http,jdk.naming.dns,java.security.sasl,java.compiler,java.rmi \
     --strip-debug \
@@ -36,7 +42,6 @@ RUN jlink \
 FROM alpine:latest
 WORKDIR /app
 
-# curl per healthcheck, libstdc++ e gcompat per Java su Alpine
 RUN apk add --no-cache libstdc++ gcompat curl
 
 ENV JAVA_HOME=/opt/java-runtime
@@ -45,5 +50,8 @@ ENV SERVER_URL=http://localhost:8080
 
 COPY --from=build /javaruntime $JAVA_HOME
 COPY --from=build /app/target/*.jar app.jar
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8080/actuator/health || exit 1
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
