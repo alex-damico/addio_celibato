@@ -24,7 +24,6 @@ public class QuestionService {
         Integer nextPosition = repository.findFirstByOrderByPositionDesc()
                 .map(lastQuestion -> lastQuestion.getPosition() + 1)
                 .orElse(1);
-        
         question.setPosition(nextPosition);
         return this.repository.save(question).getId();
     }
