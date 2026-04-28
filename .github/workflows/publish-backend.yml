@@ -1,11 +1,11 @@
-name: Build and Publish Backend
+name: Build and Publish Frontend
 
 on:
   workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.event.repository.name }}-backend
+  IMAGE_NAME: ${{ github.event.repository.name }}-frontend
 
 jobs:
   build-and-push:
@@ -17,11 +17,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: arm64
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -39,24 +34,16 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=latest
             type=sha,format=short
-
-      # - name: Delete old image versions
-      #   uses: actions/delete-package-versions@v5
-      #   with:
-      #     package-name: ${{ env.IMAGE_NAME }}
-      #     package-type: 'container'
-      #     min-versions-to-keep: 0
-      #     delete-only-untagged-versions: 'false'
-      #     token: ${{ secrets.DELETE_PACKAGES_TOKEN }}
+            type=raw,value=latest
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./be
-          platforms: linux/amd64,linux/arm64
+          context: ./fe
+          platforms: linux/amd64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          # Se il tuo Dockerfile necessita di build-args (es. versioni Java), aggiungili qui
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
