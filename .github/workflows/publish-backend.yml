@@ -1,11 +1,11 @@
-name: Build and Publish Frontend
+name: Build and Publish Backend
 
 on:
   workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.event.repository.name }}-frontend
+  IMAGE_NAME: ${{ github.event.repository.name }}-backend
 
 jobs:
   build-and-push:
@@ -40,7 +40,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./fe
+          context: ./be
           platforms: linux/amd64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
