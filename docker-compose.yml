@@ -36,7 +36,7 @@ services:
       - pgadmin_data:/var/lib/pgadmin
 
   backend:
-    image: addio_celibato-backend:cazzo2
+    image: ghcr.io/alex-damico/addio_celibato-backend:latest
     container_name: backend_container
     profiles: [ "apps" ]
     depends_on:
