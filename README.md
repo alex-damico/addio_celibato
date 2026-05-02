@@ -3,11 +3,11 @@ link: http://localhost:5050/
 
 # Docker-compose
 - Per sviluppo 
-    - Avviare ```docker-compose up -d```
-    - Stoppare ```docker-compose down```
+    - Avviare ```docker-compose --env-file .env up -d```
+    - Stoppare ```docker-compose --env-file .env down```
 - Per cloud
-    - Avviare ```docker-compose --profile apps up -d```
-    - Stoppare ```docker-compose --profile apps down```
+    - Avviare ```docker-compose --env-file .env --profile apps up -d```
+    - Stoppare ```docker-compose --env-file .env --profile apps down```
 
 # Bot telegram
 
