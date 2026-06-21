@@ -271,7 +271,7 @@ class _RestClient implements RestClient {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/tasks/?page=0&size=50',
+            '/tasks/?page=0&size=200',
             queryParameters: queryParameters,
             data: _data,
           )

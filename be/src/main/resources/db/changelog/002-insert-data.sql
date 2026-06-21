@@ -108,35 +108,68 @@ VALUES
 (5, '🇮🇹 È Roma.', false, 11);
 
 INSERT INTO task (content)
-VALUES ('🎤 *IL CANDIDATO* 🎤' || n'
-' || 'Chiedi a 3 sconosciuti un consiglio per un matrimonio felice e registra un video mentre te lo dicono! 📹'),
+VALUES
+    ('🟢 *5 FLessioni EASY* 💪' || E'\n' || 'Fai 5 flessioni davanti al gruppo 🔥'),
+    ('🟢 *SELFIE RANDOM* 📸' || E'\n' || 'Scatta una foto buffa senza pensarci 😄'),
+    ('🟢 *DANCE BREAK 10s* 🕺' || E'\n' || 'Fai 10 secondi di ballo improvvisato 😂'),
+    ('🟢 *APPLAUSI ROMANI* 👏' || E'\n' || 'Fai 10 applausi forti in piazza'),
+    ('🟢 *MODEL WALK* 🚶' || E'\n' || 'Cammina 20 metri come una passerella 😎'),
+    ('🟢 *STATUA FRIEND* 🤳' || E'\n' || 'Foto con una statua come fosse un amico'),
+    ('🟢 *RISATA VELOCE* 😂' || E'\n' || 'Fai ridere il gruppo entro 20 secondi'),
+    ('🟢 *STATUA MODE* 🧍' || E'\n' || 'Resta immobile per 15 secondi'),
+    ('🟢 *URLO RANDOM* 📢' || E'\n' || 'Urla “SAM DOVE SEI?”'),
+    ('🟢 *SALUTO TURISTI* 👋' || E'\n' || 'Saluta 5 turisti'),
+    ('🟢 *FACCIA STRANA* 🎭' || E'\n' || 'Fai una faccia assurda'),
+    ('🟢 *POSE RANDOM* 📸' || E'\n' || 'Fai 3 pose strane'),
+    ('🟢 *SCATTO* 🏃' || E'\n' || 'Corri sul posto 10 secondi'),
+    ('🟢 *VOCE STRANA* 🗣️' || E'\n' || 'Parla con voce buffa'),
+    ('🟢 *DITO PUNTATO* 🎯' || E'\n' || 'Indica qualcosa a caso e inventa una spiegazione “intellettuale” seria ma completamente assurda 😄'),
+    ('🟢 *SALUTO REALE* 👋' || E'\n' || 'Saluta qualcuno come se fossi un ambasciatore'),
+    ('🟢 *VOCE NARRATORE* 🎤' || E'\n' || 'Parla come se stessi narrando un film epico per 30 secondi'),
+    ('🟢 *COOL MODE* 😎' || E'\n' || 'Cammina da figo per 20 metri');
 
-       ('🍻 *L''ULTIMO BRINDISI* 🍻' || n'
-' || 'Trova qualcuno che si chiami come la tua futura sposa e offrile da bere (o fatti offrire un giro!). 🥂'),
+INSERT INTO task (content)
+VALUES
+    ('🟡 *15 FLessioni* 💪' || E'\n' || 'Fai 15 flessioni davanti a tutti 🔥'),
+    ('🟡 *STORIA INSTAGRAM* 📸' || E'\n' || 'Fai una storia improvvisata su un oggetto 😎'),
+    ('🟡 *INFO ASSURDA* 🗣️' || E'\n' || 'Chiedi qualcosa di ovvio a uno sconosciuto 😂'),
+    ('🟡 *GLADIATORE* 🎭' || E'\n' || 'Fai una scena da gladiatore romano'),
+    ('🟡 *FALLA RIDERE* 😂' || E'\n' || 'Fai ridere qualcuno entro 30 secondi'),
+    ('🟡 *ANNUNCIO* 📢' || E'\n' || 'Urla una frase motivazionale'),
+    ('🟡 *DANCE 20s* 🕺' || E'\n' || 'Balla 20 secondi senza musica'),
+    ('🟡 *SELFIE STRANO* 📸' || E'\n' || 'Fai selfie con 3 sconosciuti'),
+    ('🟡 *ENIGMA* 🧠' || E'\n' || 'Rispondi inventando una storia'),
+    ('🟡 *ROMA SPEECH* 🎤' || E'\n' || 'Spiega perché Roma è la migliore'),
+    ('🟡 *INTERVISTA* 🗣️' || E'\n' || 'Fai una domanda assurda ad uno sconosciuto'),
+    ('🟡 *SCATTO* 🏃' || E'\n' || 'Corri 30 secondi sul posto'),
+    ('🟡 *VIDEO STORY* 🤳' || E'\n' || 'Registra una storia parlando di un oggetto inutile'),
+    ('🟡 *GUARDA FISSO* 👀' || E'\n' || 'Fissa una ragazza per 30 secondi'),
+    ('🟡 *PERSONAGGIO* 🎭' || E'\n' || 'Interpreta un ruolo'),
+    ('🟡 *SEGUI GRUPPO* 📍' || E'\n' || 'Segui il gruppo in silenzio per 2 minuti'),
+    ('🟡 *RISATA GRUPPO* 😂' || E'\n' || 'Fai ridere tutti'),
+    ('🟡 *URLO EPICO* 🎤' || E'\n' || 'Urla una frase epica in piazza'),
+    ('🟡 *SALUTA TUTTI* 👋' || E'\n' || 'Saluta chiunque incontri');
 
-       ('👰 *SPOSO MODELLO* 👰' || n'
-' ||
-        'Fatti scattare una foto con un velo improvvisato (tovaglioli, carta igienica o sacchetti) e inviala nel gruppo! 📸'),
-
-       ('📣 *DICHIARAZIONE PUBBLICA* 📣' || n'
-' || 'Sali su una sedia o una panchina e urla: "MI SPOSO E SONO L''UOMO PIÙ FELICE DEL MONDO!" 🌍'),
-
-       ('🎶 *TEST DI SOPRAVVIVENZA* 🎶' || n'
-' || 'Convincere un gruppo di sconosciuti a cantare insieme a te un coro da stadio o una canzone strappalacrime! 🎤'),
-
-       ('🕶️ *CAMBIO LOOK* 🕶️' || n'
-' ||
-        'Indossa un accessorio imbarazzante scelto dai testimoni (boa di piume, occhiali giganti) per i prossimi 30 minuti! 🎭'),
-
-       ('💪 *L''ACROBATA* 💪' || n'
-' ||
-        'Esegui 10 flessioni in mezzo alla strada; per ogni flessione urla un motivo per cui ami la tua futura moglie! ❤️'),
-
-       ('📱 *SERENATA 2.0* 📱' || n'
-' || 'Invia un vocale alla tua fidanzata cantando la vostra canzone... ma con la voce da cartone animato! 🐭'),
-
-       ('🤳 *SELFIE DI GRUPPO* 🤳' || n'
-' || 'Fai un selfie con almeno 5 sconosciuti in posa "disperata" per la tua fine imminente! 😱'),
-
-       ('💐 *L''ADDESTRAMENTO* 💐' || n'
-' || 'Recupera dei fiori e consegnali alla prima coppia di anziani che incontri augurando loro lunga vita! 👴👵');
+INSERT INTO task (content)
+VALUES
+    ('🔴 *SPOSO IN CRISI* 💍' || E'\n' || 'Fermati in pubblico e dichiara: "sto ancora valutando se sposarmi" con massima serietà 😐'),
+    ('🔴 *FOTO ROMANTICA RANDOM* 📸' || E'\n' || 'Chiedi a uno sconosciuto di scattare una foto “romantica da matrimonio” con lo sposo 💍'),
+    ('🔴 *DICHIARAZIONE PUBBLICA* 💬' || E'\n' || 'Urla una frase tipo “da oggi non sarò più libero!” in piazza'),
+    ('🔴 *PASSERELLA DELLO SPOSO* 🕺' || E'\n' || 'Fai sfilare lo sposo come una celebrità tra i turisti 😎'),
+    ('🔴 *FOTO TURISTI A CASO* 📸' || E'\n' || 'Chiedi a un gruppo di turisti una foto ufficiale “addio al celibato italiano”'),
+    ('🔴 *INTERVISTA MATRIMONIALE* 🗣️' || E'\n' || 'Chiedi a uno sconosciuto consigli sul matrimonio e registra la risposta'),
+    ('🔴 *STORIA INSTAGRAM VERGOGNOSA* 📱' || E'\n' || 'Fai una storia dicendo che lo sposo “non è pronto per questa vita” 😂'),
+    ('🔴 *ANNUNCIO TURISTICO FAKE* 📢' || E'\n' || 'Fai un annuncio come guida: “attenzione, passa lo sposo!”'),
+    ('🔴 *FOTO IMBARAZZANTE DI GRUPPO* 🤳' || E'\n' || 'Chiedi a uno sconosciuto una foto di gruppo molto seria e formale'),
+    ('🔴 *GIURAMENTO PUBBLICO* 🎤' || E'\n' || 'Fai giurare allo sposo una promessa assurda davanti alla piazza'),
+    ('🔴 *SIMULAZIONE MATRIMONIO* 💍' || E'\n' || 'Fai una mini cerimonia fake in mezzo alla strada'),
+    ('🔴 *URLO COLLETTIVO* 📢' || E'\n' || 'Fai urlare al gruppo “W LO SPOSO!” davanti ai turisti'),
+    ('🔴 *SCENA ROMANTICA FAKE* 🎭' || E'\n' || 'Ricrea una scena romantica teatrale con lo sposo'),
+    ('🔴 *REPORTER STRADALE* 🗞️' || E'\n' || 'Intervista turisti sullo sposo come fosse una star'),
+    ('🔴 *FOTO SERIA ASSURDA* 📸' || E'\n' || 'Chiedi a uno sconosciuto una foto estremamente seria come documento ufficiale'),
+    ('🔴 *MISSIONE SILENZIOSA* 🤐' || E'\n' || 'Lo sposo deve camminare serio tra la gente senza ridere per 2 minuti'),
+    ('🔴 *INTERVISTA INVASIVA 2.0* 🗣️' || E'\n' || 'Fai una domanda ancora più assurda a uno sconosciuto e insisti per una risposta'),
+    ('🔴 *PASSERELLA TRA TURISTI* 🚶' || E'\n' || 'Lo sposo deve attraversare lentamente una zona piena di turisti come una sfilata'),
+    ('🔴 *CERIMONIA PUBBLICA FAKE* 💍' || E'\n' || 'Simula una cerimonia completa con pubblico improvvisato'),
+    ('🔴 *DICHIARAZIONE D’AMORE FINTA* 💬' || E'\n' || 'Lo sposo deve fare una dichiarazione teatrale a Roma come fosse la sua sposa'),
+    ('🔴 *APPLAUSO FORZATO* 👏' || E'\n' || 'Coinvolgi i passanti a fare un applauso allo sposo');

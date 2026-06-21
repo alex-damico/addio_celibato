@@ -48,7 +48,7 @@ abstract class RestClient {
   @POST('/hints/')
   Future<int> saveHint(@Body() HintCreateDto hint);
 
-  @GET('/tasks/?page=0&size=50')
+  @GET('/tasks/?page=0&size=200')
   Future<TasksDto> getAllTasks();
 
   @POST('/tasks/{id}/send')
