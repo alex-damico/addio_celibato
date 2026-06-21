@@ -2,31 +2,110 @@
 --changeset addio_celibato:002
 
 INSERT INTO question (position, intro, content, correct_answer, is_resolved)
-VALUES (1, 'Iniziamo con una domanda di riscaldamento.', 'Qual è la capitale d''Italia?', 'Roma', true),
-       (2, 'Passiamo alla geografia internazionale.', 'In quale continente si trova il deserto del Sahara?', 'Africa',
-        false),
-       (3, 'Un po'' di astronomia.', 'Qual è il pianeta più grande del sistema solare?', 'Giove', false),
-       (4, NULL, 'Chi ha dipinto la Gioconda?', 'Leonardo da Vinci', false),
-       (5, 'Questa è l''ultima domanda della serie.', 'Qual è il simbolo chimico dell''oro?', 'Au', false);
+VALUES (1, '🧭 Iniziamo da Piazza Barberini (usa la metro).',
+        '🧠 Osserva la Fontana del Tritone: quante code di delfino sorreggono la conchiglia?', '4', false),
+
+       (2, '👀 Manca una persona...',
+        '📍 Trova Sam 😅', 'Sam', false),
+
+       (3, '🚶 Piazza di Spagna → Trinità dei Monti.',
+        '🪜 Conta i gradini della scalinata. Qual è il numero esatto?', '135', false),
+
+       (4, '⛲ Fontana di Trevi (da Piazza di Spagna).',
+        '🐎 Osserva le statue laterali: quanti cavalli marini vedi in totale?', '2', false),
+
+       (5, '🏛️ Pantheon.',
+        '🏛️ Conta le colonne della facciata principale.', '16', false),
+
+       (6, '🌊 Piazza Navona.',
+        '🐍 Nella Fontana dei Quattro Fiumi, quale fiume non guarda la basilica?', 'Nilo', false),
+
+       (7, '👼 Castel Sant''Angelo.',
+        '🌉 Sul ponte: quante statue di angeli sono presenti in totale?', '10', false),
+
+       (8, '🇻🇦 Città del Vaticano (opzionale).',
+        '👁️ Posizionandoti su un punto preciso della piazza, quante file di colonne vedi?', '1', false),
+
+       (9, '🏠 Torniamo in appartamento',
+        '👁️ Ti sei lavato? Sei carico? Ripartiamo?', 'ANDIAMO A MANGIARE', false),
+
+       (10, '🏟️ Colosseo (serale, metro Ottaviano + Termini).',
+        '🧱 Quanti archi ci sono al piano terra del Colosseo?', '80', false),
+
+       (11, '🏛️ Fori Imperiali (serale).',
+        '📜 Qual è la parola più ricorrente nei pannelli informativi dell''area?', 'Roma', false);
 
 INSERT INTO hint (position, content, is_unlocked, question_id)
-VALUES (1, 'È conosciuta come la Città Eterna.', true, 1),
-       (2, 'Ospita al suo interno lo Stato del Vaticano.', false, 1),
+VALUES
+-- Q1
+(1, '🔎 Guarda sotto il Tritone.', false, 1),
+(2, '⚖️ Sono simmetriche.', false, 1),
+(3, '⬇️ Non sono sopra.', false, 1),
+(4, '🌊 Sono creature marine.', false, 1),
 
-       (1, 'È lo stesso continente dove scorre il Nilo.', true, 2),
-       (2, 'Si trova a sud dell''Europa, separata dal Mediterraneo.', false, 2),
-       (3, 'È la terra dei safari e delle piramidi.', false, 2),
+-- Q2
+(1, '📍 Chi hai trovato?', false, 2),
 
-       (1, 'È un gigante gassoso.', true, 3),
-       (2, 'Ha una famosa "Grande Macchia Rossa".', false, 3),
-       (3, 'Viene dopo Marte nell''ordine dal Sole.', false, 3),
+-- Q3
+(1, '⬇️ Parti dal basso.', false, 3),
+(2, '🚫 Non saltarne nessuno.', false, 3),
+(3, '🔢 Sono più di 120.', false, 3),
+(4, '🪜 Devi contarli tutti.', false, 3),
 
-       (1, 'Era un genio del Rinascimento italiano.', true, 4),
-       (2, 'Non era solo un pittore, ma anche un inventore e scienziato.', false, 4),
-       (3, 'Il suo cognome deriva da una piccola città toscana.', false, 4),
+-- Q4
+(1, '👀 Guarda ai lati.', false, 4),
+(2, '🚫 Non il Tritone centrale.', false, 4),
+(3, '🐎 Sono animali marini.', false, 4),
+(4, '↔️ Uno per lato.', false, 4),
 
-       (1, 'Il nome deriva dal termine latino "Aurum".', true, 5),
-       (2, 'È il metallo prezioso per eccellenza.', false, 5);
+-- Q5
+(1, '🏛️ Solo davanti.', false, 5),
+(2, '🚫 Non dentro.', false, 5),
+(3, '📏 Sono alte.', false, 5),
+(4, '⚖️ Sono simmetriche.', false, 5),
+(5, '🔢 Sono 16.', false, 5),
+
+-- Q6
+(1, '👀 Guarda le statue.', false, 6),
+(2, '🙈 Una è coperta.', false, 6),
+(3, '➡️ Non guarda in avanti.', false, 6),
+(4, '📚 È un dettaglio storico.', false, 6),
+(5, '🌊 È il Nilo.', false, 6),
+
+-- Q7
+(1, '↔️ Conta entrambi i lati.', false, 7),
+(2, '⚖️ Sono simmetrici.', false, 7),
+(3, '5️⃣ per lato.', false, 7),
+(4, '⬆️ Guarda sopra il ponte.', false, 7),
+(5, '🔢 Sono 10.', false, 7),
+
+-- Q8
+(1, '🚶 Devi muoverti.', false, 8),
+(2, '🔵 Cerca i dischi a terra.', false, 8),
+(3, '🌀 Effetto ottico.', false, 8),
+(4, '📐 Le colonne si allineano.', false, 8),
+(5, '1️⃣ È una sola fila.', false, 8),
+
+-- Q9
+(1, '💪 Fai 10 flessioni davanti al gruppo 🔥', false, 9),
+(2, '📸 Fai una storia Instagram per mostrare a tutti quanto sei figo con il vestitino 😎✨', false, 9),
+(3, '🕺 Fai 15 secondi di danza improvvisata in mezzo alla piazza 😂', false, 9),
+(4, '🤳 Scatta un selfie di gruppo', false, 9),
+(5, '🍕 Dai, abbiamo fame… la risposta è "ANDIAMO A MANGIARE" 😂🔥', false, 9),
+
+-- Q10
+(1, '🚫 Non contarli tutti.', false, 10),
+(2, '📏 Conta una sezione.', false, 10),
+(3, '⚖️ È simmetrico.', false, 10),
+(4, '✖️ Moltiplica.', false, 10),
+(5, '🔢 Sono 80.', false, 10),
+
+-- Q11
+(1, '📜 Leggi i cartelli.', false, 11),
+(2, '🏷️ È un nome proprio.', false, 11),
+(3, '🔁 Compare spesso.', false, 11),
+(4, '🏙️ Riguarda la città.', false, 11),
+(5, '🇮🇹 È Roma.', false, 11);
 
 INSERT INTO task (content)
 VALUES ('🎤 *IL CANDIDATO* 🎤' || n'

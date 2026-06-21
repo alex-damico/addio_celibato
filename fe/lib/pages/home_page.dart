@@ -296,7 +296,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(width: 16),
             ElevatedButton(
               onPressed: () {
-                if (controller.text == 'sposo2025') {
+                if (controller.text == 'sposo2026') {
                   getIt<AdminService>().toggleAdmin();
                   _log.info("Modalità Admin Attivata!");
                   Navigator.pop(context);
